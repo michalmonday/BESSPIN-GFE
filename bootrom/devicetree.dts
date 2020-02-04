@@ -2,7 +2,7 @@
 #if __riscv_xlen == 32
 #define CPU_SPEED 50000000
 #else
-#define CPU_SPEED 100000000
+#define CPU_SPEED 50000000
 #endif
 #endif
 
@@ -42,7 +42,7 @@
 	};
 	memory {
 		device_type = "memory";
-		reg = <0xC0000000 0x40000000>;
+		reg = <0xC0000000 0x3f000000>;
 	};
 	reserved-memory {
 		#address-cells = <1>;
