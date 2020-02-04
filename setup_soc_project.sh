@@ -22,7 +22,7 @@ case "$proc_name" in
 	clock_freq_mhz=50
 	;;
     *p2)
-	make --always-make CROSS_COMPILE=riscv64-unknown-elf- CPU_SPEED=100000000
+	make --always-make CROSS_COMPILE=riscv64-unknown-elf- CPU_SPEED=50000000
 	clock_freq_mhz=50
 	;;
     *p3)
