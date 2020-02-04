@@ -59,9 +59,12 @@ module MakeClock ( CLK, RST,
 
    output CLK_VAL_OUT;
    output COND_OUT;
+   (* CLOCK_SIGNAL = "YES" *)
+   (* BUFFER_TYPE = "BUFG" *)
    output CLK_OUT;
    output CLK_GATE_OUT;
 
+   (* KEEP = "TRUE" *)
    reg current_clk;
    reg CLK_VAL_OUT;
    reg current_gate;
@@ -122,9 +125,8 @@ module MakeClock ( CLK, RST,
    always @( current_clk or new_gate )
      begin
         if (current_clk == 1'b0)
-/* verilator lint_off COMBDLY */
           current_gate  <= `BSV_ASSIGNMENT_DELAY new_gate ;
-/* verilator lint_on COMBDLY */     end
+     end
 
    assign CLK_OUT      = current_clk && current_gate;
    assign CLK_GATE_OUT = current_gate;
