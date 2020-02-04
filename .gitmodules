@@ -11,7 +11,7 @@
 	url = https://github.com/CTSRD-CHERI/FreeRTOS-mirror.git
 [submodule "bluespec-processors/P2/Flute"]
 	path = bluespec-processors/P2/Flute
-	url = https://github.com/bluespec/Flute.git
+	url = https://github.com/CTSRD-CHERI/Flute.git
 [submodule "riscv-linux"]
 	path = riscv-linux
 	url = ../riscv-linux.git
