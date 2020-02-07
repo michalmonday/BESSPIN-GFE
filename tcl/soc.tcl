@@ -168,6 +168,8 @@ source $origin_dir/soc_bd.tcl
 # Configure the clock frequency
 puts "Setting clock fequency to $clock_freq_mhz MHz"
 set_property -dict [list CONFIG.ADDN_UI_CLKOUT1_FREQ_HZ $clock_freq_mhz] [get_bd_cells gfe_subsystem/ddr4_0]
+set_property -dict [list CONFIG.axiliteclkrate $clock_freq_mhz] [get_bd_cells gfe_subsystem/axi_ethernet_0]
+set_property -dict [list CONFIG.axisclkrate $clock_freq_mhz] [get_bd_cells gfe_subsystem/axi_ethernet_0]
 save_bd_design
 
 # Rebuild user ip_repo's index before adding any source files
