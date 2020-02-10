@@ -1131,14 +1131,6 @@ module mkSoC_Top(CLK,
 		soc_map$m_uart16550_0_addr_base,
 		soc_map$m_uart16550_0_addr_lim;
 
-  // ports of submodule tv_xactor_f_data
-  wire [760 : 0] tv_xactor_f_data$D_IN, tv_xactor_f_data$D_OUT;
-  wire tv_xactor_f_data$CLR,
-       tv_xactor_f_data$DEQ,
-       tv_xactor_f_data$EMPTY_N,
-       tv_xactor_f_data$ENQ,
-       tv_xactor_f_data$FULL_N;
-
   // ports of submodule uart0
   wire [63 : 0] uart0$set_addr_map_addr_base,
 		uart0$set_addr_map_addr_lim,
@@ -2385,17 +2377,6 @@ module mkSoC_Top(CLK,
 		    .m_ddc_reset_value(),
 		    .m_mtcc_reset_value(),
 		    .m_mepcc_reset_value());
-
-  // submodule tv_xactor_f_data
-  FIFO2 #(.width(32'd761), .guarded(32'd1)) tv_xactor_f_data(.RST(RST_N),
-							     .CLK(CLK),
-							     .D_IN(tv_xactor_f_data$D_IN),
-							     .ENQ(tv_xactor_f_data$ENQ),
-							     .DEQ(tv_xactor_f_data$DEQ),
-							     .CLR(tv_xactor_f_data$CLR),
-							     .D_OUT(tv_xactor_f_data$D_OUT),
-							     .FULL_N(tv_xactor_f_data$FULL_N),
-							     .EMPTY_N(tv_xactor_f_data$EMPTY_N));
 
   // submodule uart0
   mkUART uart0(.CLK(CLK),
