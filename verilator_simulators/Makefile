@@ -80,7 +80,7 @@ endif
 	cd obj_dir; \
 	   make -j -f V$(TOPMODULE).mk  $(VTOP); \
 	   cp -p  $(VTOP)  ../$(SIM_EXE_FILE)
-	rm Verilog_RTL/mkP_Core.v
+	rm Verilog_RTL/mkP_Core.v Verilog_RTL/mkSoC_Top.v Verilog_RTL/$(TOPMODULE).v
 	@echo "INFO: Created verilator executable:    $(SIM_EXE_FILE)"
 
 .PHONY: jtag_simulator
@@ -113,7 +113,7 @@ endif
 	cd obj_dir; \
 	   make -j -f V$(TOPMODULE).mk  $(VTOP); \
 	   cp -p  $(VTOP)  ../$(SIM_EXE_FILE)
-	rm Verilog_RTL/mkP_Core.v
+	rm Verilog_RTL/mkP_Core.v Verilog_RTL/mkSoC_Top.v Verilog_RTL/$(TOPMODULE).v
 	@echo "INFO: Created verilator executable:    $(SIM_EXE_FILE)"
 
 clean:
