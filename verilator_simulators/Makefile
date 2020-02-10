@@ -51,8 +51,8 @@ ifeq ($(strip $(PROC)),)
 	exit 1
 endif
 	@echo "INFO: Verilating Verilog files (in newly created obj_dir)"
-	cp Verilog_RTL/mkSoC_Top_orig.v Verilog_RTL/mkSoC_Top.v
-	sed  -f $(VERILATOR_RESOURCES)/sed_script.txt  Verilog_RTL/$(TOPMODULE)_orig.v > tmp1.v
+	cp procs/$(PROC)/mkSoC_Top.v Verilog_RTL/mkSoC_Top.v
+	sed  -f $(VERILATOR_RESOURCES)/sed_script.txt  procs/$(PROC)/$(TOPMODULE).v > tmp1.v
 	cat  $(VERILATOR_RESOURCES)/verilator_config.vlt \
 	     $(VERILATOR_RESOURCES)/import_DPI_C_decls.v \
 	     tmp1.v                                     > Verilog_RTL/$(TOPMODULE).v
@@ -60,10 +60,10 @@ endif
 	sed  -f $(VERILATOR_RESOURCES)/sed_script2.txt  $(PROCESSOR_RTL)/$(TOPNAME).v > tmp2.v
 	mv tmp2.v Verilog_RTL/mkP_Core.v
 ifeq ($(PROC), chisel_p1XXX)
-	sed  -f $(VERILATOR_RESOURCES)/sed_script3.txt  Verilog_RTL/mkSoC_Top_orig.v > Verilog_RTL/mkSoC_Top.v
+	sed  -f $(VERILATOR_RESOURCES)/sed_script3.txt  procs/$(PROC)/mkSoC_Top.v > Verilog_RTL/mkSoC_Top.v
 endif
 ifeq ($(PROC), chisel_p2XXX)
-	sed  -f $(VERILATOR_RESOURCES)/sed_script3.txt  Verilog_RTL/mkSoC_Top_orig.v > Verilog_RTL/mkSoC_Top.v
+	sed  -f $(VERILATOR_RESOURCES)/sed_script3.txt  procs/$(PROC)/mkSoC_Top.v > Verilog_RTL/mkSoC_Top.v
 endif
 	verilator \
 		-IVerilog_RTL \
@@ -90,8 +90,8 @@ ifeq ($(strip $(PROC)),)
 	exit 1
 endif
 	@echo "INFO: Verilating Verilog files (in newly created obj_dir)"
-	cp Verilog_RTL/mkSoC_Top_orig.v Verilog_RTL/mkSoC_Top.v
-	sed  -f $(VERILATOR_RESOURCES)/sed_script.txt  Verilog_RTL/$(TOPMODULE)_orig.v > tmp1.v
+	cp procs/$(PROC)/mkSoC_Top.v Verilog_RTL/mkSoC_Top.v
+	sed  -f $(VERILATOR_RESOURCES)/sed_script.txt  procs/$(PROC)/$(TOPMODULE).v > tmp1.v
 	cat  $(VERILATOR_RESOURCES)/verilator_config.vlt \
 	     $(VERILATOR_RESOURCES)/import_DPI_C_decls.v \
 	     tmp1.v                                     > Verilog_RTL/$(TOPMODULE).v

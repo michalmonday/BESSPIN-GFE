@@ -7,6 +7,8 @@
 // Ports:
 // Name                         I/O  size props
 // RDY_set_verbosity              O     1 const
+// tv_verifier_info_get_get       O   608 reg
+// RDY_tv_verifier_info_get_get   O     1 reg
 // to_raw_mem_request_get         O   353
 // RDY_to_raw_mem_request_get     O     1
 // RDY_to_raw_mem_response_put    O     1
@@ -28,6 +30,7 @@
 // EN_to_raw_mem_response_put     I     1
 // EN_put_from_console_put        I     1
 // EN_set_watch_tohost            I     1
+// EN_tv_verifier_info_get_get    I     1
 // EN_to_raw_mem_request_get      I     1
 // EN_get_to_console_get          I     1
 //
@@ -55,6 +58,10 @@ module mkSoC_Top(CLK,
 		 set_verbosity_logdelay,
 		 EN_set_verbosity,
 		 RDY_set_verbosity,
+
+		 EN_tv_verifier_info_get_get,
+		 tv_verifier_info_get_get,
+		 RDY_tv_verifier_info_get_get,
 
 		 EN_to_raw_mem_request_get,
 		 to_raw_mem_request_get,
@@ -88,6 +95,11 @@ module mkSoC_Top(CLK,
   input  EN_set_verbosity;
   output RDY_set_verbosity;
 
+  // actionvalue method tv_verifier_info_get_get
+  input  EN_tv_verifier_info_get_get;
+  output [607 : 0] tv_verifier_info_get_get;
+  output RDY_tv_verifier_info_get_get;
+
   // actionvalue method to_raw_mem_request_get
   input  EN_to_raw_mem_request_get;
   output [352 : 0] to_raw_mem_request_get;
@@ -119,6 +131,7 @@ module mkSoC_Top(CLK,
   output RDY_set_watch_tohost;
 
   // signals for module outputs
+  wire [607 : 0] tv_verifier_info_get_get;
   wire [352 : 0] to_raw_mem_request_get;
   wire [7 : 0] get_to_console_get;
   wire RDY_assert_soft_reset,
@@ -128,6 +141,7 @@ module mkSoC_Top(CLK,
        RDY_set_watch_tohost,
        RDY_to_raw_mem_request_get,
        RDY_to_raw_mem_response_put,
+       RDY_tv_verifier_info_get_get,
        assert_soft_reset;
 
   // register boot_rom_axi4_deburster_rg_ar_beat_count
@@ -381,6 +395,9 @@ module mkSoC_Top(CLK,
        boot_rom_axi4_deburster_xactor_to_slave_f_wr_resp$FULL_N;
 
   // ports of submodule core
+  wire [607 : 0] core$tv_verifier_info_tx_tdata;
+  wire [75 : 0] core$tv_verifier_info_tx_tkeep,
+		core$tv_verifier_info_tx_tstrb;
   wire [63 : 0] core$master0_araddr,
 		core$master0_awaddr,
 		core$master0_rdata,
@@ -464,7 +481,10 @@ module mkSoC_Top(CLK,
        core$master1_rvalid,
        core$master1_wlast,
        core$master1_wready,
-       core$master1_wvalid;
+       core$master1_wvalid,
+       core$tv_verifier_info_tx_tlast,
+       core$tv_verifier_info_tx_tready,
+       core$tv_verifier_info_tx_tvalid;
 
   // ports of submodule cpu_reset
   wire cpu_reset$ASSERT_IN, cpu_reset$OUT_RST;
@@ -1111,12 +1131,6 @@ module mkSoC_Top(CLK,
   wire sim_jtag$tclk, sim_jtag$tdi, sim_jtag$tdo, sim_jtag$tms;
 
   // ports of submodule soc_map
-  wire [127 : 0] soc_map$m_boot_rom_addr_range,
-		 soc_map$m_ddr4_0_cached_addr_range,
-		 soc_map$m_ddr4_0_uncached_addr_range,
-		 soc_map$m_flash_mem_addr_range,
-		 soc_map$m_gpio_0_addr_range,
-		 soc_map$m_uart16550_0_addr_range;
   wire [63 : 0] soc_map$m_boot_rom_addr_base,
 		soc_map$m_boot_rom_addr_lim,
 		soc_map$m_ddr4_0_cached_addr_lim,
@@ -1291,6 +1305,10 @@ module mkSoC_Top(CLK,
   // action method set_verbosity
   assign RDY_set_verbosity = 1'd1 ;
 
+  // actionvalue method tv_verifier_info_get_get
+  assign tv_verifier_info_get_get = tv_xactor_f_data$D_OUT[760:153] ;
+  assign RDY_tv_verifier_info_get_get = tv_xactor_f_data$EMPTY_N ;
+
   // actionvalue method to_raw_mem_request_get
   assign to_raw_mem_request_get = mem0_controller$to_raw_mem_request_get ;
   assign RDY_to_raw_mem_request_get =
@@ -1346,7 +1364,6 @@ module mkSoC_Top(CLK,
 		      .slave_wdata(boot_rom$slave_wdata),
 		      .slave_wlast(boot_rom$slave_wlast),
 		      .slave_wstrb(boot_rom$slave_wstrb),
-		      .slave_wuser(),
 		      .slave_wvalid(boot_rom$slave_wvalid),
 		      .EN_set_addr_map(boot_rom$EN_set_addr_map),
 		      .RDY_set_addr_map(),
@@ -1356,7 +1373,6 @@ module mkSoC_Top(CLK,
 		      .slave_bid(boot_rom$slave_bid),
 		      .slave_bresp(boot_rom$slave_bresp),
 		      .slave_arready(boot_rom$slave_arready),
-		      .slave_ruser(),
 		      .slave_rvalid(boot_rom$slave_rvalid),
 		      .slave_rid(boot_rom$slave_rid),
 		      .slave_rdata(boot_rom$slave_rdata),
@@ -1540,6 +1556,7 @@ module mkSoC_Top(CLK,
 		.master1_rresp(core$master1_rresp),
 		.master1_rvalid(core$master1_rvalid),
 		.master1_wready(core$master1_wready),
+		.tv_verifier_info_tx_tready(core$tv_verifier_info_tx_tready),
 		.master0_awvalid(core$master0_awvalid),
 		.master0_awid(core$master0_awid),
 		.master0_awaddr(core$master0_awaddr),
@@ -1596,6 +1613,11 @@ module mkSoC_Top(CLK,
 		.master1_arqos(core$master1_arqos),
 		.master1_arregion(core$master1_arregion),
 		.master1_rready(core$master1_rready),
+		.tv_verifier_info_tx_tvalid(core$tv_verifier_info_tx_tvalid),
+		.tv_verifier_info_tx_tdata(core$tv_verifier_info_tx_tdata),
+		.tv_verifier_info_tx_tstrb(core$tv_verifier_info_tx_tstrb),
+		.tv_verifier_info_tx_tkeep(core$tv_verifier_info_tx_tkeep),
+		.tv_verifier_info_tx_tlast(core$tv_verifier_info_tx_tlast),
 		.jtag_tdo(core$jtag_tdo),
 		.CLK_jtag_tclk_out(core$CLK_jtag_tclk_out),
 		.CLK_GATE_jtag_tclk_out());
@@ -2168,7 +2190,6 @@ module mkSoC_Top(CLK,
 				   .slave_wdata(mem0_controller$slave_wdata),
 				   .slave_wlast(mem0_controller$slave_wlast),
 				   .slave_wstrb(mem0_controller$slave_wstrb),
-				   .slave_wuser(),
 				   .slave_wvalid(mem0_controller$slave_wvalid),
 				   .to_raw_mem_response_put(mem0_controller$to_raw_mem_response_put),
 				   .EN_server_reset_request_put(mem0_controller$EN_server_reset_request_put),
@@ -2186,7 +2207,6 @@ module mkSoC_Top(CLK,
 				   .slave_bid(mem0_controller$slave_bid),
 				   .slave_bresp(mem0_controller$slave_bresp),
 				   .slave_arready(mem0_controller$slave_arready),
-				   .slave_ruser(),
 				   .slave_rvalid(mem0_controller$slave_rvalid),
 				   .slave_rid(mem0_controller$slave_rid),
 				   .slave_rdata(mem0_controller$slave_rdata),
@@ -2195,7 +2215,6 @@ module mkSoC_Top(CLK,
 				   .to_raw_mem_request_get(mem0_controller$to_raw_mem_request_get),
 				   .RDY_to_raw_mem_request_get(mem0_controller$RDY_to_raw_mem_request_get),
 				   .RDY_to_raw_mem_response_put(mem0_controller$RDY_to_raw_mem_response_put),
-				   .status(),
 				   .RDY_set_watch_tohost());
 
   // submodule mem0_controller_axi4_deburster_f_r_arlen
@@ -2360,31 +2379,42 @@ module mkSoC_Top(CLK,
 		    .m_is_IO_addr_addr(soc_map$m_is_IO_addr_addr),
 		    .m_is_mem_addr_addr(soc_map$m_is_mem_addr_addr),
 		    .m_is_near_mem_IO_addr_addr(soc_map$m_is_near_mem_IO_addr_addr),
-		    .m_plic_addr_range(),
-		    .m_near_mem_io_addr_range(),
-		    .m_axi_quad_spi_0_full_addr_range(soc_map$m_flash_mem_addr_range),
-		    .m_axi_quad_spi_0_lite_addr_range(),
-		    .m_axi_quad_spi_1_addr_range(),
-		    .m_ethernet_0_addr_range(),
-		    .m_dma_0_addr_range(),
-		    .m_uart16550_0_addr_range(soc_map$m_uart16550_0_addr_range),
-		    .m_uart16550_1_addr_range(),
-		    .m_gpio_0_addr_range(soc_map$m_gpio_0_addr_range),
-		    .m_gpio_1_addr_range(),
-		    .m_iic_0_addr_range(),
-		    .m_boot_rom_addr_range(soc_map$m_boot_rom_addr_range),
-		    .m_ddr4_0_uncached_addr_range(soc_map$m_ddr4_0_uncached_addr_range),
-		    .m_ddr4_0_cached_addr_range(),
+		    .m_plic_addr_base(),
+		    .m_plic_addr_size(),
+		    .m_plic_addr_lim(),
+		    .m_near_mem_io_addr_base(),
+		    .m_near_mem_io_addr_size(),
+		    .m_near_mem_io_addr_lim(),
+		    .m_flash_mem_addr_base(soc_map$m_flash_mem_addr_base),
+		    .m_flash_mem_addr_size(),
+		    .m_flash_mem_addr_lim(soc_map$m_flash_mem_addr_lim),
+		    .m_ethernet_0_addr_base(),
+		    .m_ethernet_0_addr_size(),
+		    .m_ethernet_0_addr_lim(),
+		    .m_dma_0_addr_base(),
+		    .m_dma_0_addr_size(),
+		    .m_dma_0_addr_lim(),
+		    .m_uart16550_0_addr_base(soc_map$m_uart16550_0_addr_base),
+		    .m_uart16550_0_addr_size(),
+		    .m_uart16550_0_addr_lim(soc_map$m_uart16550_0_addr_lim),
+		    .m_gpio_0_addr_base(soc_map$m_gpio_0_addr_base),
+		    .m_gpio_0_addr_size(),
+		    .m_gpio_0_addr_lim(soc_map$m_gpio_0_addr_lim),
+		    .m_boot_rom_addr_base(soc_map$m_boot_rom_addr_base),
+		    .m_boot_rom_addr_size(),
+		    .m_boot_rom_addr_lim(soc_map$m_boot_rom_addr_lim),
+		    .m_ddr4_0_uncached_addr_base(soc_map$m_ddr4_0_uncached_addr_base),
+		    .m_ddr4_0_uncached_addr_size(),
+		    .m_ddr4_0_uncached_addr_lim(),
+		    .m_ddr4_0_cached_addr_base(),
+		    .m_ddr4_0_cached_addr_size(),
+		    .m_ddr4_0_cached_addr_lim(soc_map$m_ddr4_0_cached_addr_lim),
 		    .m_is_mem_addr(),
 		    .m_is_IO_addr(),
 		    .m_is_near_mem_IO_addr(),
 		    .m_pc_reset_value(),
 		    .m_mtvec_reset_value(),
-		    .m_nmivec_reset_value(),
-		    .m_pcc_reset_value(),
-		    .m_ddc_reset_value(),
-		    .m_mtcc_reset_value(),
-		    .m_mepcc_reset_value());
+		    .m_nmivec_reset_value());
 
   // submodule tv_xactor_f_data
   FIFO2 #(.width(32'd761), .guarded(32'd1)) tv_xactor_f_data(.RST(RST_N),
@@ -2430,7 +2460,6 @@ module mkSoC_Top(CLK,
 	       .slave_wdata(uart0$slave_wdata),
 	       .slave_wlast(uart0$slave_wlast),
 	       .slave_wstrb(uart0$slave_wstrb),
-	       .slave_wuser(),
 	       .slave_wvalid(uart0$slave_wvalid),
 	       .EN_server_reset_request_put(uart0$EN_server_reset_request_put),
 	       .EN_server_reset_response_get(uart0$EN_server_reset_response_get),
@@ -2446,7 +2475,6 @@ module mkSoC_Top(CLK,
 	       .slave_bid(uart0$slave_bid),
 	       .slave_bresp(uart0$slave_bresp),
 	       .slave_arready(uart0$slave_arready),
-	       .slave_ruser(),
 	       .slave_rvalid(uart0$slave_rvalid),
 	       .slave_rid(uart0$slave_rid),
 	       .slave_rdata(uart0$slave_rdata),
@@ -3059,6 +3087,7 @@ module mkSoC_Top(CLK,
   assign core$master1_rresp = fabric$v_from_masters_1_rresp ;
   assign core$master1_rvalid = fabric$v_from_masters_1_rvalid ;
   assign core$master1_wready = fabric$v_from_masters_1_wready ;
+  assign core$tv_verifier_info_tx_tready = tv_xactor_f_data$FULL_N ;
 
   // submodule cpu_reset
   assign cpu_reset$ASSERT_IN = cpu_initial_reset || rg_state == 2'd2 ;
@@ -3735,20 +3764,20 @@ module mkSoC_Top(CLK,
   assign sim_jtag$tdo = core$jtag_tdo ;
 
   // submodule soc_map
-  assign soc_map$m_boot_rom_addr_base = soc_map$m_boot_rom_addr_range[127:64];
-  assign soc_map$m_boot_rom_addr_lim = soc_map$m_boot_rom_addr_range[127:64] + soc_map$m_boot_rom_addr_range[63:0];
-  assign soc_map$m_ddr4_0_cached_addr_lim = soc_map$m_ddr4_0_cached_addr_range[127:64] + soc_map$m_ddr4_0_cached_addr_range[63:0];
-  assign soc_map$m_ddr4_0_uncached_addr_base = soc_map$m_ddr4_0_uncached_addr_range[127:64];
-  assign soc_map$m_flash_mem_addr_base = soc_map$m_flash_mem_addr_range[127:64];
-  assign soc_map$m_flash_mem_addr_lim = soc_map$m_flash_mem_addr_range[127:64] + soc_map$m_flash_mem_addr_range[63:0];
-  assign soc_map$m_gpio_0_addr_base = soc_map$m_gpio_0_addr_range[127:64];
-  assign soc_map$m_gpio_0_addr_lim = soc_map$m_gpio_0_addr_range[127:64] + soc_map$m_gpio_0_addr_range[63:0];
   assign soc_map$m_is_IO_addr_addr = 64'h0 ;
   assign soc_map$m_is_mem_addr_addr = 64'h0 ;
   assign soc_map$m_is_near_mem_IO_addr_addr = 64'h0 ;
-  assign soc_map$m_uart16550_0_addr_base = soc_map$m_uart16550_0_addr_range[127:64];
-  assign soc_map$m_uart16550_0_addr_lim = soc_map$m_uart16550_0_addr_range[127:64] + soc_map$m_uart16550_0_addr_range[63:0];
 
+  // submodule tv_xactor_f_data
+  assign tv_xactor_f_data$D_IN =
+	     { core$tv_verifier_info_tx_tdata,
+	       core$tv_verifier_info_tx_tstrb,
+	       core$tv_verifier_info_tx_tkeep,
+	       core$tv_verifier_info_tx_tlast } ;
+  assign tv_xactor_f_data$ENQ =
+	     core$tv_verifier_info_tx_tvalid && tv_xactor_f_data$FULL_N ;
+  assign tv_xactor_f_data$DEQ = EN_tv_verifier_info_get_get ;
+  assign tv_xactor_f_data$CLR = WILL_FIRE_RL_rl_reset_start_2 ;
 
   // submodule uart0
   assign uart0$put_from_console_put = put_from_console_put ;
