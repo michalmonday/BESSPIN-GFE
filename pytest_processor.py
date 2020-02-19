@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 import re
-from subprocess import run, TimeoutExpired, CalledProcessError, PIPE
+from subprocess import run, TimeoutExpired, PIPE
 import time
 import os
 
