@@ -2206,20 +2206,20 @@ module mkFabric_AXI4(CLK,
        fabric_xactors_to_slaves_4_f_wr_resp$ENQ,
        fabric_xactors_to_slaves_4_f_wr_resp$FULL_N;
 
-  // ports of submodule soc_map_veril
-  wire [63 : 0] soc_map_veril$m_boot_rom_addr_base,
-		soc_map_veril$m_boot_rom_addr_lim,
-		soc_map_veril$m_ddr4_0_cached_addr_lim,
-		soc_map_veril$m_ddr4_0_uncached_addr_base,
-		soc_map_veril$m_flash_mem_addr_base,
-		soc_map_veril$m_flash_mem_addr_lim,
-		soc_map_veril$m_gpio_0_addr_base,
-		soc_map_veril$m_gpio_0_addr_lim,
-		soc_map_veril$m_is_IO_addr_addr,
-		soc_map_veril$m_is_mem_addr_addr,
-		soc_map_veril$m_is_near_mem_IO_addr_addr,
-		soc_map_veril$m_uart16550_0_addr_base,
-		soc_map_veril$m_uart16550_0_addr_lim;
+  // ports of submodule soc_map
+  wire [63 : 0] soc_map$m_boot_rom_addr_base,
+		soc_map$m_boot_rom_addr_lim,
+		soc_map$m_ddr4_0_cached_addr_lim,
+		soc_map$m_ddr4_0_uncached_addr_base,
+		soc_map$m_flash_mem_addr_base,
+		soc_map$m_flash_mem_addr_lim,
+		soc_map$m_gpio_0_addr_base,
+		soc_map$m_gpio_0_addr_lim,
+		soc_map$m_is_IO_addr_addr,
+		soc_map$m_is_mem_addr_addr,
+		soc_map$m_is_near_mem_IO_addr_addr,
+		soc_map$m_uart16550_0_addr_base,
+		soc_map$m_uart16550_0_addr_lim;
 
   // rule scheduling signals
   wire CAN_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_5,
@@ -2458,14 +2458,14 @@ module mkFabric_AXI4(CLK,
 	       x__h28237,
 	       x__h31683,
 	       x__h32084;
-  wire [2 : 0] IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d152,
-	       IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d48,
-	       IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d494,
-	       IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d580,
-	       IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d150,
-	       IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d46,
-	       IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d492,
-	       IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d578;
+  wire [2 : 0] IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d152,
+	       IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d48,
+	       IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d494,
+	       IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d580,
+	       IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d150,
+	       IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d46,
+	       IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d492,
+	       IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d578;
   wire [1 : 0] IF_fabric_v_rg_r_beat_count_0_83_EQ_fabric_v_f_ETC___d712,
 	       IF_fabric_v_rg_r_beat_count_1_23_EQ_fabric_v_f_ETC___d751,
 	       IF_fabric_v_rg_r_beat_count_2_62_EQ_fabric_v_f_ETC___d790,
@@ -2476,14 +2476,14 @@ module mkFabric_AXI4(CLK,
 	       x1_avValue_rresp__h26983,
 	       x1_avValue_rresp__h27599,
 	       x1_avValue_rresp__h28215;
-  wire NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d224,
-       NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d253,
-       NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d645,
-       NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d671,
-       NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d222,
-       NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d251,
-       NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d643,
-       NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d669,
+  wire NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d224,
+       NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d253,
+       NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d645,
+       NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d671,
+       NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d222,
+       NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d251,
+       NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d643,
+       NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d669,
        _dor1fabric_v_f_rd_mis_0$EN_deq,
        _dor1fabric_v_f_rd_mis_1$EN_deq,
        _dor1fabric_v_f_rd_mis_2$EN_deq,
@@ -2520,34 +2520,34 @@ module mkFabric_AXI4(CLK,
        fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d136,
        fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d139,
        fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d142,
-       soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d132,
-       soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d21,
-       soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d474,
-       soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d560,
-       soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d129,
-       soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d147,
-       soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d16,
-       soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d43,
-       soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d471,
-       soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d489,
-       soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d557,
-       soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d575,
-       soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d135,
-       soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d145,
-       soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d26,
-       soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d41,
-       soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d477,
-       soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d487,
-       soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d563,
-       soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d573,
-       soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d138,
-       soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d31,
-       soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d480,
-       soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d566,
-       soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d141,
-       soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d36,
-       soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d483,
-       soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d569;
+       soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d132,
+       soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d21,
+       soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d474,
+       soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d560,
+       soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d129,
+       soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d147,
+       soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d16,
+       soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d43,
+       soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d471,
+       soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d489,
+       soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d557,
+       soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d575,
+       soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d135,
+       soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d145,
+       soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d26,
+       soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d41,
+       soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d477,
+       soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d487,
+       soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d563,
+       soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d573,
+       soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d138,
+       soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d31,
+       soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d480,
+       soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d566,
+       soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d141,
+       soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d36,
+       soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d483,
+       soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d569;
 
   // action method reset
   assign RDY_reset = !fabric_rg_reset ;
@@ -3877,48 +3877,48 @@ module mkFabric_AXI4(CLK,
 								.FULL_N(fabric_xactors_to_slaves_4_f_wr_resp$FULL_N),
 								.EMPTY_N(fabric_xactors_to_slaves_4_f_wr_resp$EMPTY_N));
 
-  // submodule soc_map_veril
-  mkSoC_Map_Veril soc_map_veril(.CLK(CLK),
-				.RST_N(RST_N),
-				.m_is_IO_addr_addr(soc_map_veril$m_is_IO_addr_addr),
-				.m_is_mem_addr_addr(soc_map_veril$m_is_mem_addr_addr),
-				.m_is_near_mem_IO_addr_addr(soc_map_veril$m_is_near_mem_IO_addr_addr),
-				.m_plic_addr_base(),
-				.m_plic_addr_size(),
-				.m_plic_addr_lim(),
-				.m_near_mem_io_addr_base(),
-				.m_near_mem_io_addr_size(),
-				.m_near_mem_io_addr_lim(),
-				.m_flash_mem_addr_base(soc_map_veril$m_flash_mem_addr_base),
-				.m_flash_mem_addr_size(),
-				.m_flash_mem_addr_lim(soc_map_veril$m_flash_mem_addr_lim),
-				.m_ethernet_0_addr_base(),
-				.m_ethernet_0_addr_size(),
-				.m_ethernet_0_addr_lim(),
-				.m_dma_0_addr_base(),
-				.m_dma_0_addr_size(),
-				.m_dma_0_addr_lim(),
-				.m_uart16550_0_addr_base(soc_map_veril$m_uart16550_0_addr_base),
-				.m_uart16550_0_addr_size(),
-				.m_uart16550_0_addr_lim(soc_map_veril$m_uart16550_0_addr_lim),
-				.m_gpio_0_addr_base(soc_map_veril$m_gpio_0_addr_base),
-				.m_gpio_0_addr_size(),
-				.m_gpio_0_addr_lim(soc_map_veril$m_gpio_0_addr_lim),
-				.m_boot_rom_addr_base(soc_map_veril$m_boot_rom_addr_base),
-				.m_boot_rom_addr_size(),
-				.m_boot_rom_addr_lim(soc_map_veril$m_boot_rom_addr_lim),
-				.m_ddr4_0_uncached_addr_base(soc_map_veril$m_ddr4_0_uncached_addr_base),
-				.m_ddr4_0_uncached_addr_size(),
-				.m_ddr4_0_uncached_addr_lim(),
-				.m_ddr4_0_cached_addr_base(),
-				.m_ddr4_0_cached_addr_size(),
-				.m_ddr4_0_cached_addr_lim(soc_map_veril$m_ddr4_0_cached_addr_lim),
-				.m_is_mem_addr(),
-				.m_is_IO_addr(),
-				.m_is_near_mem_IO_addr(),
-				.m_pc_reset_value(),
-				.m_mtvec_reset_value(),
-				.m_nmivec_reset_value());
+  // submodule soc_map
+  mkSoC_Map_Veril soc_map(.CLK(CLK),
+			  .RST_N(RST_N),
+			  .m_is_IO_addr_addr(soc_map$m_is_IO_addr_addr),
+			  .m_is_mem_addr_addr(soc_map$m_is_mem_addr_addr),
+			  .m_is_near_mem_IO_addr_addr(soc_map$m_is_near_mem_IO_addr_addr),
+			  .m_plic_addr_base(),
+			  .m_plic_addr_size(),
+			  .m_plic_addr_lim(),
+			  .m_near_mem_io_addr_base(),
+			  .m_near_mem_io_addr_size(),
+			  .m_near_mem_io_addr_lim(),
+			  .m_flash_mem_addr_base(soc_map$m_flash_mem_addr_base),
+			  .m_flash_mem_addr_size(),
+			  .m_flash_mem_addr_lim(soc_map$m_flash_mem_addr_lim),
+			  .m_ethernet_0_addr_base(),
+			  .m_ethernet_0_addr_size(),
+			  .m_ethernet_0_addr_lim(),
+			  .m_dma_0_addr_base(),
+			  .m_dma_0_addr_size(),
+			  .m_dma_0_addr_lim(),
+			  .m_uart16550_0_addr_base(soc_map$m_uart16550_0_addr_base),
+			  .m_uart16550_0_addr_size(),
+			  .m_uart16550_0_addr_lim(soc_map$m_uart16550_0_addr_lim),
+			  .m_gpio_0_addr_base(soc_map$m_gpio_0_addr_base),
+			  .m_gpio_0_addr_size(),
+			  .m_gpio_0_addr_lim(soc_map$m_gpio_0_addr_lim),
+			  .m_boot_rom_addr_base(soc_map$m_boot_rom_addr_base),
+			  .m_boot_rom_addr_size(),
+			  .m_boot_rom_addr_lim(soc_map$m_boot_rom_addr_lim),
+			  .m_ddr4_0_uncached_addr_base(soc_map$m_ddr4_0_uncached_addr_base),
+			  .m_ddr4_0_uncached_addr_size(),
+			  .m_ddr4_0_uncached_addr_lim(),
+			  .m_ddr4_0_cached_addr_base(),
+			  .m_ddr4_0_cached_addr_size(),
+			  .m_ddr4_0_cached_addr_lim(soc_map$m_ddr4_0_cached_addr_lim),
+			  .m_is_mem_addr(),
+			  .m_is_IO_addr(),
+			  .m_is_near_mem_IO_addr(),
+			  .m_pc_reset_value(),
+			  .m_mtvec_reset_value(),
+			  .m_nmivec_reset_value());
 
   // rule RL_fabric_rl_wr_xaction_master_to_slave
   assign WILL_FIRE_RL_fabric_rl_wr_xaction_master_to_slave =
@@ -3927,8 +3927,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_wd_tasks_0$FULL_N &&
 	     fabric_v_f_wr_mis_0$FULL_N &&
 	     fabric_v_f_wr_sjs_0$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d43 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d48 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d43 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d48 ==
 	     3'd0 ;
 
   // rule RL_fabric_rl_wr_xaction_master_to_slave_1
@@ -3938,8 +3938,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_wr_sjs_0$FULL_N &&
 	     fabric_xactors_to_slaves_1_f_wr_addr$FULL_N &&
 	     fabric_v_f_wr_mis_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d43 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d48 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d43 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d48 ==
 	     3'd1 ;
 
   // rule RL_fabric_rl_wr_xaction_master_to_slave_2
@@ -3949,8 +3949,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_wr_sjs_0$FULL_N &&
 	     fabric_xactors_to_slaves_2_f_wr_addr$FULL_N &&
 	     fabric_v_f_wr_mis_2$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d43 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d48 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d43 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d48 ==
 	     3'd2 ;
 
   // rule RL_fabric_rl_wr_xaction_master_to_slave_3
@@ -3960,8 +3960,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_wr_sjs_0$FULL_N &&
 	     fabric_xactors_to_slaves_3_f_wr_addr$FULL_N &&
 	     fabric_v_f_wr_mis_3$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d43 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d48 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d43 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d48 ==
 	     3'd3 ;
 
   // rule RL_fabric_rl_wr_xaction_master_to_slave_4
@@ -3971,8 +3971,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_wr_sjs_0$FULL_N &&
 	     fabric_xactors_to_slaves_4_f_wr_addr$FULL_N &&
 	     fabric_v_f_wr_mis_4$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d43 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d48 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d43 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d48 ==
 	     3'd4 ;
 
   // rule RL_fabric_rl_wr_xaction_master_to_slave_5
@@ -3982,8 +3982,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_xactors_from_masters_1_f_wr_addr$EMPTY_N &&
 	     fabric_v_f_wd_tasks_1$FULL_N &&
 	     fabric_v_f_wr_sjs_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d147 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d152 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d147 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d152 ==
 	     3'd0 ;
   assign WILL_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_5 =
 	     CAN_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_5 &&
@@ -3996,8 +3996,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_xactors_from_masters_1_f_wr_addr$EMPTY_N &&
 	     fabric_v_f_wd_tasks_1$FULL_N &&
 	     fabric_v_f_wr_sjs_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d147 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d152 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d147 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d152 ==
 	     3'd1 ;
   assign WILL_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_6 =
 	     CAN_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_6 &&
@@ -4010,8 +4010,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_xactors_from_masters_1_f_wr_addr$EMPTY_N &&
 	     fabric_v_f_wd_tasks_1$FULL_N &&
 	     fabric_v_f_wr_sjs_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d147 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d152 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d147 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d152 ==
 	     3'd2 ;
   assign WILL_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_7 =
 	     CAN_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_7 &&
@@ -4024,8 +4024,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_xactors_from_masters_1_f_wr_addr$EMPTY_N &&
 	     fabric_v_f_wd_tasks_1$FULL_N &&
 	     fabric_v_f_wr_sjs_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d147 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d152 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d147 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d152 ==
 	     3'd3 ;
   assign WILL_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_8 =
 	     CAN_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_8 &&
@@ -4038,8 +4038,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_xactors_from_masters_1_f_wr_addr$EMPTY_N &&
 	     fabric_v_f_wd_tasks_1$FULL_N &&
 	     fabric_v_f_wr_sjs_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d147 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d152 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d147 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d152 ==
 	     3'd4 ;
   assign WILL_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_9 =
 	     CAN_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_9 &&
@@ -4052,7 +4052,7 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_wr_sjs_0$FULL_N &&
 	     fabric_xactors_from_masters_0_f_wr_data$EMPTY_N &&
 	     fabric_v_f_wr_err_info_0$FULL_N &&
-	     NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d224 ;
+	     NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d224 ;
 
   // rule RL_fabric_rl_wr_xaction_no_such_slave_1
   assign WILL_FIRE_RL_fabric_rl_wr_xaction_no_such_slave_1 =
@@ -4061,7 +4061,7 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_wr_sjs_1$FULL_N &&
 	     fabric_xactors_from_masters_1_f_wr_data$EMPTY_N &&
 	     fabric_v_f_wr_err_info_1$FULL_N &&
-	     NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d253 ;
+	     NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d253 ;
 
   // rule RL_fabric_rl_wr_xaction_master_to_slave_data
   assign WILL_FIRE_RL_fabric_rl_wr_xaction_master_to_slave_data =
@@ -4189,8 +4189,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_xactors_to_slaves_0_f_rd_addr$FULL_N &&
 	     fabric_v_f_rd_mis_0$FULL_N &&
 	     fabric_v_f_rd_sjs_0$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d489 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d494 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d489 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d494 ==
 	     3'd0 ;
 
   // rule RL_fabric_rl_rd_xaction_master_to_slave_1
@@ -4199,8 +4199,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_rd_sjs_0$FULL_N &&
 	     fabric_xactors_to_slaves_1_f_rd_addr$FULL_N &&
 	     fabric_v_f_rd_mis_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d489 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d494 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d489 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d494 ==
 	     3'd1 ;
 
   // rule RL_fabric_rl_rd_xaction_master_to_slave_2
@@ -4209,8 +4209,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_rd_sjs_0$FULL_N &&
 	     fabric_xactors_to_slaves_2_f_rd_addr$FULL_N &&
 	     fabric_v_f_rd_mis_2$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d489 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d494 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d489 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d494 ==
 	     3'd2 ;
 
   // rule RL_fabric_rl_rd_xaction_master_to_slave_3
@@ -4219,8 +4219,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_rd_sjs_0$FULL_N &&
 	     fabric_xactors_to_slaves_3_f_rd_addr$FULL_N &&
 	     fabric_v_f_rd_mis_3$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d489 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d494 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d489 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d494 ==
 	     3'd3 ;
 
   // rule RL_fabric_rl_rd_xaction_master_to_slave_4
@@ -4229,8 +4229,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_rd_sjs_0$FULL_N &&
 	     fabric_xactors_to_slaves_4_f_rd_addr$FULL_N &&
 	     fabric_v_f_rd_mis_4$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d489 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d494 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d489 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d494 ==
 	     3'd4 ;
 
   // rule RL_fabric_rl_rd_xaction_master_to_slave_5
@@ -4239,8 +4239,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_rd_mis_0$FULL_N &&
 	     fabric_xactors_from_masters_1_f_rd_addr$EMPTY_N &&
 	     fabric_v_f_rd_sjs_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d575 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d580 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d575 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d580 ==
 	     3'd0 ;
   assign WILL_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_5 =
 	     CAN_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_5 &&
@@ -4252,8 +4252,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_rd_mis_1$FULL_N &&
 	     fabric_xactors_from_masters_1_f_rd_addr$EMPTY_N &&
 	     fabric_v_f_rd_sjs_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d575 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d580 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d575 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d580 ==
 	     3'd1 ;
   assign WILL_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_6 =
 	     CAN_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_6 &&
@@ -4265,8 +4265,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_rd_mis_2$FULL_N &&
 	     fabric_xactors_from_masters_1_f_rd_addr$EMPTY_N &&
 	     fabric_v_f_rd_sjs_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d575 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d580 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d575 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d580 ==
 	     3'd2 ;
   assign WILL_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_7 =
 	     CAN_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_7 &&
@@ -4278,8 +4278,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_rd_mis_3$FULL_N &&
 	     fabric_xactors_from_masters_1_f_rd_addr$EMPTY_N &&
 	     fabric_v_f_rd_sjs_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d575 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d580 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d575 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d580 ==
 	     3'd3 ;
   assign WILL_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_8 =
 	     CAN_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_8 &&
@@ -4291,8 +4291,8 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_f_rd_mis_4$FULL_N &&
 	     fabric_xactors_from_masters_1_f_rd_addr$EMPTY_N &&
 	     fabric_v_f_rd_sjs_1$FULL_N &&
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d575 &&
-	     IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d580 ==
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d575 &&
+	     IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d580 ==
 	     3'd4 ;
   assign WILL_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_9 =
 	     CAN_FIRE_RL_fabric_rl_rd_xaction_master_to_slave_9 &&
@@ -4303,14 +4303,14 @@ module mkFabric_AXI4(CLK,
 	     fabric_xactors_from_masters_0_f_rd_addr$EMPTY_N &&
 	     fabric_v_f_rd_sjs_0$FULL_N &&
 	     fabric_v_f_rd_err_info_0$FULL_N &&
-	     NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d645 ;
+	     NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d645 ;
 
   // rule RL_fabric_rl_rd_xaction_no_such_slave_1
   assign WILL_FIRE_RL_fabric_rl_rd_xaction_no_such_slave_1 =
 	     fabric_xactors_from_masters_1_f_rd_addr$EMPTY_N &&
 	     fabric_v_f_rd_sjs_1$FULL_N &&
 	     fabric_v_f_rd_err_info_1$FULL_N &&
-	     NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d671 ;
+	     NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d671 ;
 
   // rule RL_fabric_rl_rd_resp_slave_to_master
   assign WILL_FIRE_RL_fabric_rl_rd_resp_slave_to_master =
@@ -5759,10 +5759,10 @@ module mkFabric_AXI4(CLK,
 	     WILL_FIRE_RL_fabric_rl_wr_resp_slave_to_master_4 ;
   assign fabric_xactors_to_slaves_4_f_wr_resp$CLR = fabric_rg_reset ;
 
-  // submodule soc_map_veril
-  assign soc_map_veril$m_is_IO_addr_addr = 64'h0 ;
-  assign soc_map_veril$m_is_mem_addr_addr = 64'h0 ;
-  assign soc_map_veril$m_is_near_mem_IO_addr_addr = 64'h0 ;
+  // submodule soc_map
+  assign soc_map$m_is_IO_addr_addr = 64'h0 ;
+  assign soc_map$m_is_mem_addr_addr = 64'h0 ;
+  assign soc_map$m_is_near_mem_IO_addr_addr = 64'h0 ;
 
   // remaining internal signals
   assign IF_fabric_v_rg_r_beat_count_0_83_EQ_fabric_v_f_ETC___d712 =
@@ -5785,121 +5785,121 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_rg_r_beat_count_4_40_EQ_fabric_v_f_rd_ETC___d842 ?
 	       x1_avValue_rresp__h28215 :
 	       fabric_xactors_to_slaves_4_f_rd_data$D_OUT[2:1] ;
-  assign IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d152 =
-	     (soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d129 &&
+  assign IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d152 =
+	     (soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d129 &&
 	      fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d130) ?
 	       3'd1 :
-	       ((soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d132 &&
+	       ((soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d132 &&
 		 fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d133) ?
 		  3'd0 :
-		  IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d150) ;
-  assign IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d48 =
-	     (soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d16 &&
+		  IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d150) ;
+  assign IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d48 =
+	     (soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d16 &&
 	      fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d18) ?
 	       3'd1 :
-	       ((soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d21 &&
+	       ((soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d21 &&
 		 fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d23) ?
 		  3'd0 :
-		  IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d46) ;
-  assign IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d494 =
-	     (soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d471 &&
+		  IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d46) ;
+  assign IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d494 =
+	     (soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d471 &&
 	      fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d472) ?
 	       3'd1 :
-	       ((soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d474 &&
+	       ((soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d474 &&
 		 fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d475) ?
 		  3'd0 :
-		  IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d492) ;
-  assign IF_soc_map_veril_m_ddr4_0_uncached_addr_base___ETC___d580 =
-	     (soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d557 &&
+		  IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d492) ;
+  assign IF_soc_map_m_ddr4_0_uncached_addr_base__3_ULE__ETC___d580 =
+	     (soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d557 &&
 	      fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d558) ?
 	       3'd1 :
-	       ((soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d560 &&
+	       ((soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d560 &&
 		 fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d561) ?
 		  3'd0 :
-		  IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d578) ;
-  assign IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d150 =
-	     (soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d135 &&
+		  IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d578) ;
+  assign IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d150 =
+	     (soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d135 &&
 	      fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d136) ?
 	       3'd3 :
-	       ((soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d138 &&
+	       ((soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d138 &&
 		 fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d139) ?
 		  3'd4 :
 		  3'd2) ;
-  assign IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d46 =
-	     (soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d26 &&
+  assign IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d46 =
+	     (soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d26 &&
 	      fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d28) ?
 	       3'd3 :
-	       ((soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d31 &&
+	       ((soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d31 &&
 		 fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d33) ?
 		  3'd4 :
 		  3'd2) ;
-  assign IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d492 =
-	     (soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d477 &&
+  assign IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d492 =
+	     (soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d477 &&
 	      fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d478) ?
 	       3'd3 :
-	       ((soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d480 &&
+	       ((soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d480 &&
 		 fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d481) ?
 		  3'd4 :
 		  3'd2) ;
-  assign IF_soc_map_veril_m_flash_mem_addr_base__5_ULE__ETC___d578 =
-	     (soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d563 &&
+  assign IF_soc_map_m_flash_mem_addr_base__5_ULE_fabric_ETC___d578 =
+	     (soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d563 &&
 	      fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d564) ?
 	       3'd3 :
-	       ((soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d566 &&
+	       ((soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d566 &&
 		 fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d567) ?
 		  3'd4 :
 		  3'd2) ;
-  assign NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d224 =
-	     (!soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d16 ||
+  assign NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d224 =
+	     (!soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d16 ||
 	      !fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d18) &&
-	     (!soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d21 ||
+	     (!soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d21 ||
 	      !fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d23) &&
-	     NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d222 ;
-  assign NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d253 =
-	     (!soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d129 ||
+	     NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d222 ;
+  assign NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d253 =
+	     (!soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d129 ||
 	      !fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d130) &&
-	     (!soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d132 ||
+	     (!soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d132 ||
 	      !fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d133) &&
-	     NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d251 ;
-  assign NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d645 =
-	     (!soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d471 ||
+	     NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d251 ;
+  assign NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d645 =
+	     (!soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d471 ||
 	      !fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d472) &&
-	     (!soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d474 ||
+	     (!soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d474 ||
 	      !fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d475) &&
-	     NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d643 ;
-  assign NOT_soc_map_veril_m_ddr4_0_uncached_addr_base__ETC___d671 =
-	     (!soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d557 ||
+	     NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d643 ;
+  assign NOT_soc_map_m_ddr4_0_uncached_addr_base__3_ULE_ETC___d671 =
+	     (!soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d557 ||
 	      !fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d558) &&
-	     (!soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d560 ||
+	     (!soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d560 ||
 	      !fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d561) &&
-	     NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d669 ;
-  assign NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d222 =
-	     (!soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d26 ||
+	     NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d669 ;
+  assign NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d222 =
+	     (!soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d26 ||
 	      !fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d28) &&
-	     (!soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d31 ||
+	     (!soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d31 ||
 	      !fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d33) &&
-	     (!soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d36 ||
+	     (!soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d36 ||
 	      !fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d38) ;
-  assign NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d251 =
-	     (!soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d135 ||
+  assign NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d251 =
+	     (!soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d135 ||
 	      !fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d136) &&
-	     (!soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d138 ||
+	     (!soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d138 ||
 	      !fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d139) &&
-	     (!soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d141 ||
+	     (!soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d141 ||
 	      !fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d142) ;
-  assign NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d643 =
-	     (!soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d477 ||
+  assign NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d643 =
+	     (!soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d477 ||
 	      !fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d478) &&
-	     (!soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d480 ||
+	     (!soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d480 ||
 	      !fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d481) &&
-	     (!soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d483 ||
+	     (!soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d483 ||
 	      !fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d484) ;
-  assign NOT_soc_map_veril_m_flash_mem_addr_base__5_ULE_ETC___d669 =
-	     (!soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d563 ||
+  assign NOT_soc_map_m_flash_mem_addr_base__5_ULE_fabri_ETC___d669 =
+	     (!soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d563 ||
 	      !fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d564) &&
-	     (!soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d566 ||
+	     (!soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d566 ||
 	      !fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d567) &&
-	     (!soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d569 ||
+	     (!soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d569 ||
 	      !fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d570) ;
   assign _dor1fabric_v_f_rd_mis_0$EN_deq =
 	     WILL_FIRE_RL_fabric_rl_rd_resp_slave_to_master_5 ||
@@ -5942,175 +5942,175 @@ module mkFabric_AXI4(CLK,
 	     fabric_v_rg_wd_beat_count_1 == fabric_v_f_wd_tasks_1$D_OUT[7:0] ;
   assign fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d472 =
 	     fabric_xactors_from_masters_0_f_rd_addr$D_OUT[92:29] <
-	     soc_map_veril$m_ddr4_0_cached_addr_lim ;
+	     soc_map$m_ddr4_0_cached_addr_lim ;
   assign fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d475 =
 	     fabric_xactors_from_masters_0_f_rd_addr$D_OUT[92:29] <
-	     soc_map_veril$m_boot_rom_addr_lim ;
+	     soc_map$m_boot_rom_addr_lim ;
   assign fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d478 =
 	     fabric_xactors_from_masters_0_f_rd_addr$D_OUT[92:29] <
-	     soc_map_veril$m_flash_mem_addr_lim ;
+	     soc_map$m_flash_mem_addr_lim ;
   assign fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d481 =
 	     fabric_xactors_from_masters_0_f_rd_addr$D_OUT[92:29] <
-	     soc_map_veril$m_gpio_0_addr_lim ;
+	     soc_map$m_gpio_0_addr_lim ;
   assign fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d484 =
 	     fabric_xactors_from_masters_0_f_rd_addr$D_OUT[92:29] <
-	     soc_map_veril$m_uart16550_0_addr_lim ;
+	     soc_map$m_uart16550_0_addr_lim ;
   assign fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d18 =
 	     fabric_xactors_from_masters_0_f_wr_addr$D_OUT[92:29] <
-	     soc_map_veril$m_ddr4_0_cached_addr_lim ;
+	     soc_map$m_ddr4_0_cached_addr_lim ;
   assign fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d23 =
 	     fabric_xactors_from_masters_0_f_wr_addr$D_OUT[92:29] <
-	     soc_map_veril$m_boot_rom_addr_lim ;
+	     soc_map$m_boot_rom_addr_lim ;
   assign fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d28 =
 	     fabric_xactors_from_masters_0_f_wr_addr$D_OUT[92:29] <
-	     soc_map_veril$m_flash_mem_addr_lim ;
+	     soc_map$m_flash_mem_addr_lim ;
   assign fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d33 =
 	     fabric_xactors_from_masters_0_f_wr_addr$D_OUT[92:29] <
-	     soc_map_veril$m_gpio_0_addr_lim ;
+	     soc_map$m_gpio_0_addr_lim ;
   assign fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d38 =
 	     fabric_xactors_from_masters_0_f_wr_addr$D_OUT[92:29] <
-	     soc_map_veril$m_uart16550_0_addr_lim ;
+	     soc_map$m_uart16550_0_addr_lim ;
   assign fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d558 =
 	     fabric_xactors_from_masters_1_f_rd_addr$D_OUT[92:29] <
-	     soc_map_veril$m_ddr4_0_cached_addr_lim ;
+	     soc_map$m_ddr4_0_cached_addr_lim ;
   assign fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d561 =
 	     fabric_xactors_from_masters_1_f_rd_addr$D_OUT[92:29] <
-	     soc_map_veril$m_boot_rom_addr_lim ;
+	     soc_map$m_boot_rom_addr_lim ;
   assign fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d564 =
 	     fabric_xactors_from_masters_1_f_rd_addr$D_OUT[92:29] <
-	     soc_map_veril$m_flash_mem_addr_lim ;
+	     soc_map$m_flash_mem_addr_lim ;
   assign fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d567 =
 	     fabric_xactors_from_masters_1_f_rd_addr$D_OUT[92:29] <
-	     soc_map_veril$m_gpio_0_addr_lim ;
+	     soc_map$m_gpio_0_addr_lim ;
   assign fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d570 =
 	     fabric_xactors_from_masters_1_f_rd_addr$D_OUT[92:29] <
-	     soc_map_veril$m_uart16550_0_addr_lim ;
+	     soc_map$m_uart16550_0_addr_lim ;
   assign fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d130 =
 	     fabric_xactors_from_masters_1_f_wr_addr$D_OUT[92:29] <
-	     soc_map_veril$m_ddr4_0_cached_addr_lim ;
+	     soc_map$m_ddr4_0_cached_addr_lim ;
   assign fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d133 =
 	     fabric_xactors_from_masters_1_f_wr_addr$D_OUT[92:29] <
-	     soc_map_veril$m_boot_rom_addr_lim ;
+	     soc_map$m_boot_rom_addr_lim ;
   assign fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d136 =
 	     fabric_xactors_from_masters_1_f_wr_addr$D_OUT[92:29] <
-	     soc_map_veril$m_flash_mem_addr_lim ;
+	     soc_map$m_flash_mem_addr_lim ;
   assign fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d139 =
 	     fabric_xactors_from_masters_1_f_wr_addr$D_OUT[92:29] <
-	     soc_map_veril$m_gpio_0_addr_lim ;
+	     soc_map$m_gpio_0_addr_lim ;
   assign fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d142 =
 	     fabric_xactors_from_masters_1_f_wr_addr$D_OUT[92:29] <
-	     soc_map_veril$m_uart16550_0_addr_lim ;
-  assign soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d132 =
-	     soc_map_veril$m_boot_rom_addr_base <=
+	     soc_map$m_uart16550_0_addr_lim ;
+  assign soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d132 =
+	     soc_map$m_boot_rom_addr_base <=
 	     fabric_xactors_from_masters_1_f_wr_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d21 =
-	     soc_map_veril$m_boot_rom_addr_base <=
+  assign soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d21 =
+	     soc_map$m_boot_rom_addr_base <=
 	     fabric_xactors_from_masters_0_f_wr_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d474 =
-	     soc_map_veril$m_boot_rom_addr_base <=
+  assign soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d474 =
+	     soc_map$m_boot_rom_addr_base <=
 	     fabric_xactors_from_masters_0_f_rd_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d560 =
-	     soc_map_veril$m_boot_rom_addr_base <=
+  assign soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d560 =
+	     soc_map$m_boot_rom_addr_base <=
 	     fabric_xactors_from_masters_1_f_rd_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d129 =
-	     soc_map_veril$m_ddr4_0_uncached_addr_base <=
+  assign soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d129 =
+	     soc_map$m_ddr4_0_uncached_addr_base <=
 	     fabric_xactors_from_masters_1_f_wr_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d147 =
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d129 &&
+  assign soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d147 =
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d129 &&
 	     fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d130 ||
-	     soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d132 &&
+	     soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d132 &&
 	     fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d133 ||
-	     soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d145 ;
-  assign soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d16 =
-	     soc_map_veril$m_ddr4_0_uncached_addr_base <=
+	     soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d145 ;
+  assign soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d16 =
+	     soc_map$m_ddr4_0_uncached_addr_base <=
 	     fabric_xactors_from_masters_0_f_wr_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d43 =
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d16 &&
+  assign soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d43 =
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d16 &&
 	     fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d18 ||
-	     soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d21 &&
+	     soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d21 &&
 	     fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d23 ||
-	     soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d41 ;
-  assign soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d471 =
-	     soc_map_veril$m_ddr4_0_uncached_addr_base <=
+	     soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d41 ;
+  assign soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d471 =
+	     soc_map$m_ddr4_0_uncached_addr_base <=
 	     fabric_xactors_from_masters_0_f_rd_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d489 =
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d471 &&
+  assign soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d489 =
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d471 &&
 	     fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d472 ||
-	     soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d474 &&
+	     soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d474 &&
 	     fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d475 ||
-	     soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d487 ;
-  assign soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d557 =
-	     soc_map_veril$m_ddr4_0_uncached_addr_base <=
+	     soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d487 ;
+  assign soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d557 =
+	     soc_map$m_ddr4_0_uncached_addr_base <=
 	     fabric_xactors_from_masters_1_f_rd_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d575 =
-	     soc_map_veril_m_ddr4_0_uncached_addr_base__3_U_ETC___d557 &&
+  assign soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d575 =
+	     soc_map_m_ddr4_0_uncached_addr_base__3_ULE_fab_ETC___d557 &&
 	     fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d558 ||
-	     soc_map_veril_m_boot_rom_addr_base__0_ULE_fabr_ETC___d560 &&
+	     soc_map_m_boot_rom_addr_base__0_ULE_fabric_xac_ETC___d560 &&
 	     fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d561 ||
-	     soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d573 ;
-  assign soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d135 =
-	     soc_map_veril$m_flash_mem_addr_base <=
+	     soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d573 ;
+  assign soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d135 =
+	     soc_map$m_flash_mem_addr_base <=
 	     fabric_xactors_from_masters_1_f_wr_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d145 =
-	     soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d135 &&
+  assign soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d145 =
+	     soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d135 &&
 	     fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d136 ||
-	     soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d138 &&
+	     soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d138 &&
 	     fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d139 ||
-	     soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d141 &&
+	     soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d141 &&
 	     fabric_xactors_from_masters_1_f_wr_addr_first__ETC___d142 ;
-  assign soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d26 =
-	     soc_map_veril$m_flash_mem_addr_base <=
+  assign soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d26 =
+	     soc_map$m_flash_mem_addr_base <=
 	     fabric_xactors_from_masters_0_f_wr_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d41 =
-	     soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d26 &&
+  assign soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d41 =
+	     soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d26 &&
 	     fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d28 ||
-	     soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d31 &&
+	     soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d31 &&
 	     fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d33 ||
-	     soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d36 &&
+	     soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d36 &&
 	     fabric_xactors_from_masters_0_f_wr_addr_first__ETC___d38 ;
-  assign soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d477 =
-	     soc_map_veril$m_flash_mem_addr_base <=
+  assign soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d477 =
+	     soc_map$m_flash_mem_addr_base <=
 	     fabric_xactors_from_masters_0_f_rd_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d487 =
-	     soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d477 &&
+  assign soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d487 =
+	     soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d477 &&
 	     fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d478 ||
-	     soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d480 &&
+	     soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d480 &&
 	     fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d481 ||
-	     soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d483 &&
+	     soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d483 &&
 	     fabric_xactors_from_masters_0_f_rd_addr_first__ETC___d484 ;
-  assign soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d563 =
-	     soc_map_veril$m_flash_mem_addr_base <=
+  assign soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d563 =
+	     soc_map$m_flash_mem_addr_base <=
 	     fabric_xactors_from_masters_1_f_rd_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d573 =
-	     soc_map_veril_m_flash_mem_addr_base__5_ULE_fab_ETC___d563 &&
+  assign soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d573 =
+	     soc_map_m_flash_mem_addr_base__5_ULE_fabric_xa_ETC___d563 &&
 	     fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d564 ||
-	     soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d566 &&
+	     soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d566 &&
 	     fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d567 ||
-	     soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d569 &&
+	     soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d569 &&
 	     fabric_xactors_from_masters_1_f_rd_addr_first__ETC___d570 ;
-  assign soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d138 =
-	     soc_map_veril$m_gpio_0_addr_base <=
+  assign soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d138 =
+	     soc_map$m_gpio_0_addr_base <=
 	     fabric_xactors_from_masters_1_f_wr_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d31 =
-	     soc_map_veril$m_gpio_0_addr_base <=
+  assign soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d31 =
+	     soc_map$m_gpio_0_addr_base <=
 	     fabric_xactors_from_masters_0_f_wr_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d480 =
-	     soc_map_veril$m_gpio_0_addr_base <=
+  assign soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d480 =
+	     soc_map$m_gpio_0_addr_base <=
 	     fabric_xactors_from_masters_0_f_rd_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_gpio_0_addr_base__0_ULE_fabric_ETC___d566 =
-	     soc_map_veril$m_gpio_0_addr_base <=
+  assign soc_map_m_gpio_0_addr_base__0_ULE_fabric_xacto_ETC___d566 =
+	     soc_map$m_gpio_0_addr_base <=
 	     fabric_xactors_from_masters_1_f_rd_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d141 =
-	     soc_map_veril$m_uart16550_0_addr_base <=
+  assign soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d141 =
+	     soc_map$m_uart16550_0_addr_base <=
 	     fabric_xactors_from_masters_1_f_wr_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d36 =
-	     soc_map_veril$m_uart16550_0_addr_base <=
+  assign soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d36 =
+	     soc_map$m_uart16550_0_addr_base <=
 	     fabric_xactors_from_masters_0_f_wr_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d483 =
-	     soc_map_veril$m_uart16550_0_addr_base <=
+  assign soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d483 =
+	     soc_map$m_uart16550_0_addr_base <=
 	     fabric_xactors_from_masters_0_f_rd_addr$D_OUT[92:29] ;
-  assign soc_map_veril_m_uart16550_0_addr_base__5_ULE_f_ETC___d569 =
-	     soc_map_veril$m_uart16550_0_addr_base <=
+  assign soc_map_m_uart16550_0_addr_base__5_ULE_fabric__ETC___d569 =
+	     soc_map$m_uart16550_0_addr_base <=
 	     fabric_xactors_from_masters_1_f_rd_addr$D_OUT[92:29] ;
   assign x1_avValue_rresp__h25741 =
 	     (fabric_xactors_to_slaves_0_f_rd_data$D_OUT[2:1] == 2'b0 &&

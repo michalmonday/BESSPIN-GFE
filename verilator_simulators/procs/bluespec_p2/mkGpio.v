@@ -6,7 +6,7 @@
 //
 // Ports:
 // Name                         I/O  size props
-// RDY_set_addr_map_veril         O     1 const
+// RDY_set_addr_map               O     1 const
 // slave_awready                  O     1 reg
 // slave_wready                   O     1 reg
 // slave_bvalid                   O     1 reg
@@ -22,8 +22,8 @@
 // RDY_assert_soft_reset          O     1 const
 // CLK                            I     1 clock
 // RST_N                          I     1 reset
-// set_addr_map_veril_addr_base   I    64 reg
-// set_addr_map_veril_addr_lim    I    64 reg
+// set_addr_map_addr_base         I    64 reg
+// set_addr_map_addr_lim          I    64 reg
 // slave_awvalid                  I     1
 // slave_awid                     I     6 reg
 // slave_awaddr                   I    64 reg
@@ -52,7 +52,7 @@
 // slave_arqos                    I     4 reg
 // slave_arregion                 I     4 reg
 // slave_rready                   I     1
-// EN_set_addr_map_veril          I     1
+// EN_set_addr_map                I     1
 //
 // No combinational paths from inputs to outputs
 //
@@ -74,10 +74,10 @@
 module mkGpio(CLK,
 	      RST_N,
 
-	      set_addr_map_veril_addr_base,
-	      set_addr_map_veril_addr_lim,
-	      EN_set_addr_map_veril,
-	      RDY_set_addr_map_veril,
+	      set_addr_map_addr_base,
+	      set_addr_map_addr_lim,
+	      EN_set_addr_map,
+	      RDY_set_addr_map,
 
 	      slave_awvalid,
 	      slave_awid,
@@ -139,11 +139,11 @@ module mkGpio(CLK,
   input  CLK;
   input  RST_N;
 
-  // action method set_addr_map_veril
-  input  [63 : 0] set_addr_map_veril_addr_base;
-  input  [63 : 0] set_addr_map_veril_addr_lim;
-  input  EN_set_addr_map_veril;
-  output RDY_set_addr_map_veril;
+  // action method set_addr_map
+  input  [63 : 0] set_addr_map_addr_base;
+  input  [63 : 0] set_addr_map_addr_lim;
+  input  EN_set_addr_map;
+  output RDY_set_addr_map;
 
   // action method slave_m_awvalid
   input  slave_awvalid;
@@ -229,7 +229,7 @@ module mkGpio(CLK,
   wire [5 : 0] slave_bid, slave_rid;
   wire [1 : 0] slave_bresp, slave_rresp;
   wire RDY_assert_soft_reset,
-       RDY_set_addr_map_veril,
+       RDY_set_addr_map,
        assert_soft_reset,
        slave_arready,
        slave_awready,
@@ -328,8 +328,8 @@ module mkGpio(CLK,
        slave_xactor_f_wr_addr_first__7_BITS_31_TO_29__ETC___d53,
        slave_xactor_f_wr_addr_first__7_BITS_92_TO_29__ETC___d26;
 
-  // action method set_addr_map_veril
-  assign RDY_set_addr_map_veril = 1'd1 ;
+  // action method set_addr_map
+  assign RDY_set_addr_map = 1'd1 ;
 
   // value method slave_m_awready
   assign slave_awready = slave_xactor_f_wr_addr$FULL_N ;
@@ -437,12 +437,12 @@ module mkGpio(CLK,
 	     rg_module_ready ;
 
   // register rg_addr_base
-  assign rg_addr_base$D_IN = set_addr_map_veril_addr_base ;
-  assign rg_addr_base$EN = EN_set_addr_map_veril ;
+  assign rg_addr_base$D_IN = set_addr_map_addr_base ;
+  assign rg_addr_base$EN = EN_set_addr_map ;
 
   // register rg_addr_lim
-  assign rg_addr_lim$D_IN = set_addr_map_veril_addr_lim ;
-  assign rg_addr_lim$EN = EN_set_addr_map_veril ;
+  assign rg_addr_lim$D_IN = set_addr_map_addr_lim ;
+  assign rg_addr_lim$EN = EN_set_addr_map ;
 
   // register rg_assertReset
   assign rg_assertReset$D_IN = 1'd1 ;
@@ -453,7 +453,7 @@ module mkGpio(CLK,
 
   // register rg_module_ready
   assign rg_module_ready$D_IN = 1'd1 ;
-  assign rg_module_ready$EN = EN_set_addr_map_veril ;
+  assign rg_module_ready$EN = EN_set_addr_map ;
 
   // register rg_tvswitch
   assign rg_tvswitch$D_IN = slave_xactor_f_wr_data$D_OUT[18:17] ;
@@ -879,42 +879,42 @@ module mkGpio(CLK,
 	  slave_xactor_f_wr_data$D_OUT[72:9] == 64'd1)
 	$display("%0d: ASSERTING SOFT RESET!", v__h1542);
     if (RST_N != `BSV_RESET_VALUE)
-      if (EN_set_addr_map_veril && set_addr_map_veril_addr_base[2:0] != 3'd0)
+      if (EN_set_addr_map && set_addr_map_addr_base[2:0] != 3'd0)
 	begin
 	  v__h1724 = $stime;
 	  #0;
 	end
     v__h1718 = v__h1724 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
-      if (EN_set_addr_map_veril && set_addr_map_veril_addr_base[2:0] != 3'd0)
-	$display("%0d: WARNING: Boot_ROM.set_addr_map_veril: addr_base 0x%0h is not 4-Byte-aligned",
+      if (EN_set_addr_map && set_addr_map_addr_base[2:0] != 3'd0)
+	$display("%0d: WARNING: Boot_ROM.set_addr_map: addr_base 0x%0h is not 4-Byte-aligned",
 		 v__h1718,
-		 set_addr_map_veril_addr_base);
+		 set_addr_map_addr_base);
     if (RST_N != `BSV_RESET_VALUE)
-      if (EN_set_addr_map_veril && set_addr_map_veril_addr_lim[2:0] != 3'd0)
+      if (EN_set_addr_map && set_addr_map_addr_lim[2:0] != 3'd0)
 	begin
 	  v__h1834 = $stime;
 	  #0;
 	end
     v__h1828 = v__h1834 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
-      if (EN_set_addr_map_veril && set_addr_map_veril_addr_lim[2:0] != 3'd0)
-	$display("%0d: WARNING: Boot_ROM.set_addr_map_veril: addr_lim 0x%0h is not 4-Byte-aligned",
+      if (EN_set_addr_map && set_addr_map_addr_lim[2:0] != 3'd0)
+	$display("%0d: WARNING: Boot_ROM.set_addr_map: addr_lim 0x%0h is not 4-Byte-aligned",
 		 v__h1828,
-		 set_addr_map_veril_addr_lim);
+		 set_addr_map_addr_lim);
     if (RST_N != `BSV_RESET_VALUE)
-      if (EN_set_addr_map_veril)
+      if (EN_set_addr_map)
 	begin
 	  v__h2001 = $stime;
 	  #0;
 	end
     v__h1995 = v__h2001 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
-      if (EN_set_addr_map_veril)
-	$display("%0d: GPIO.set_addr_map_veril: base 0x%0h lim 0x%0h",
+      if (EN_set_addr_map)
+	$display("%0d: GPIO.set_addr_map: base 0x%0h lim 0x%0h",
 		 v__h1995,
-		 set_addr_map_veril_addr_base,
-		 set_addr_map_veril_addr_lim);
+		 set_addr_map_addr_base,
+		 set_addr_map_addr_lim);
   end
   // synopsys translate_on
 endmodule  // mkGpio

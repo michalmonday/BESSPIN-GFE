@@ -2119,7 +2119,7 @@ module mkBoot_ROM(CLK,
     v__h6829 = v__h6835 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
       if (EN_set_addr_map && set_addr_map_addr_base[2:0] != 3'd0)
-	$display("%0d: WARNING: Boot_ROM.set_addr_map_veril: addr_base 0x%0h is not 4-Byte-aligned",
+	$display("%0d: WARNING: Boot_ROM.set_addr_map: addr_base 0x%0h is not 4-Byte-aligned",
 		 v__h6829,
 		 set_addr_map_addr_base);
     if (RST_N != `BSV_RESET_VALUE)
@@ -2131,7 +2131,7 @@ module mkBoot_ROM(CLK,
     v__h6939 = v__h6945 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
       if (EN_set_addr_map && set_addr_map_addr_lim[2:0] != 3'd0)
-	$display("%0d: WARNING: Boot_ROM.set_addr_map_veril: addr_lim 0x%0h is not 4-Byte-aligned",
+	$display("%0d: WARNING: Boot_ROM.set_addr_map: addr_lim 0x%0h is not 4-Byte-aligned",
 		 v__h6939,
 		 set_addr_map_addr_lim);
   end

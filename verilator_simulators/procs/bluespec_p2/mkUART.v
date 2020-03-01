@@ -8,7 +8,7 @@
 // Name                         I/O  size props
 // RDY_server_reset_request_put   O     1 reg
 // RDY_server_reset_response_get  O     1 reg
-// RDY_set_addr_map_veril         O     1 const
+// RDY_set_addr_map               O     1 const
 // slave_awready                  O     1 reg
 // slave_wready                   O     1 reg
 // slave_bvalid                   O     1 reg
@@ -26,8 +26,8 @@
 // intr                           O     1
 // CLK                            I     1 clock
 // RST_N                          I     1 reset
-// set_addr_map_veril_addr_base   I    64 reg
-// set_addr_map_veril_addr_lim    I    64 reg
+// set_addr_map_addr_base         I    64 reg
+// set_addr_map_addr_lim          I    64 reg
 // slave_awvalid                  I     1
 // slave_awid                     I     6 reg
 // slave_awaddr                   I    64 reg
@@ -59,7 +59,7 @@
 // put_from_console_put           I     8 reg
 // EN_server_reset_request_put    I     1
 // EN_server_reset_response_get   I     1
-// EN_set_addr_map_veril          I     1
+// EN_set_addr_map                I     1
 // EN_put_from_console_put        I     1
 // EN_get_to_console_get          I     1
 //
@@ -89,10 +89,10 @@ module mkUART(CLK,
 	      EN_server_reset_response_get,
 	      RDY_server_reset_response_get,
 
-	      set_addr_map_veril_addr_base,
-	      set_addr_map_veril_addr_lim,
-	      EN_set_addr_map_veril,
-	      RDY_set_addr_map_veril,
+	      set_addr_map_addr_base,
+	      set_addr_map_addr_lim,
+	      EN_set_addr_map,
+	      RDY_set_addr_map,
 
 	      slave_awvalid,
 	      slave_awid,
@@ -169,11 +169,11 @@ module mkUART(CLK,
   input  EN_server_reset_response_get;
   output RDY_server_reset_response_get;
 
-  // action method set_addr_map_veril
-  input  [63 : 0] set_addr_map_veril_addr_base;
-  input  [63 : 0] set_addr_map_veril_addr_lim;
-  input  EN_set_addr_map_veril;
-  output RDY_set_addr_map_veril;
+  // action method set_addr_map
+  input  [63 : 0] set_addr_map_addr_base;
+  input  [63 : 0] set_addr_map_addr_lim;
+  input  EN_set_addr_map;
+  output RDY_set_addr_map;
 
   // action method slave_m_awvalid
   input  slave_awvalid;
@@ -272,7 +272,7 @@ module mkUART(CLK,
        RDY_put_from_console_put,
        RDY_server_reset_request_put,
        RDY_server_reset_response_get,
-       RDY_set_addr_map_veril,
+       RDY_set_addr_map,
        intr,
        slave_arready,
        slave_awready,
@@ -508,8 +508,8 @@ module mkUART(CLK,
   // action method server_reset_response_get
   assign RDY_server_reset_response_get = f_reset_rsps$EMPTY_N ;
 
-  // action method set_addr_map_veril
-  assign RDY_set_addr_map_veril = 1'd1 ;
+  // action method set_addr_map
+  assign RDY_set_addr_map = 1'd1 ;
 
   // value method slave_m_awready
   assign slave_awready = slave_xactor_f_wr_addr$FULL_N ;
@@ -719,12 +719,12 @@ module mkUART(CLK,
   assign cfg_verbosity$EN = 1'b0 ;
 
   // register rg_addr_base
-  assign rg_addr_base$D_IN = set_addr_map_veril_addr_base ;
-  assign rg_addr_base$EN = EN_set_addr_map_veril ;
+  assign rg_addr_base$D_IN = set_addr_map_addr_base ;
+  assign rg_addr_base$EN = EN_set_addr_map ;
 
   // register rg_addr_lim
-  assign rg_addr_lim$D_IN = set_addr_map_veril_addr_lim ;
-  assign rg_addr_lim$EN = EN_set_addr_map_veril ;
+  assign rg_addr_lim$D_IN = set_addr_map_addr_lim ;
+  assign rg_addr_lim$EN = EN_set_addr_map ;
 
   // register rg_dll
   assign rg_dll$D_IN =
@@ -2842,26 +2842,26 @@ module mkUART(CLK,
       if (WILL_FIRE_RL_rl_process_wr_req &&
 	  NOT_cfg_verbosity_read_ULE_1_37___d138)
 	$write("\n");
-    if (EN_set_addr_map_veril && set_addr_map_veril_addr_base[2:0] != 3'd0)
+    if (EN_set_addr_map && set_addr_map_addr_base[2:0] != 3'd0)
       begin
         v__h4897 = $stime;
 	#0;
       end
     v__h4891 = v__h4897 / 32'd10;
-    if (EN_set_addr_map_veril && set_addr_map_veril_addr_base[2:0] != 3'd0)
-      $display("%0d: WARNING: UART.set_addr_map_veril: addr_base 0x%0h is not 8-Byte-aligned",
+    if (EN_set_addr_map && set_addr_map_addr_base[2:0] != 3'd0)
+      $display("%0d: WARNING: UART.set_addr_map: addr_base 0x%0h is not 8-Byte-aligned",
 	       v__h4891,
-	       set_addr_map_veril_addr_base);
-    if (EN_set_addr_map_veril && set_addr_map_veril_addr_lim[2:0] != 3'd0)
+	       set_addr_map_addr_base);
+    if (EN_set_addr_map && set_addr_map_addr_lim[2:0] != 3'd0)
       begin
         v__h5007 = $stime;
 	#0;
       end
     v__h5001 = v__h5007 / 32'd10;
-    if (EN_set_addr_map_veril && set_addr_map_veril_addr_lim[2:0] != 3'd0)
-      $display("%0d: WARNING: UART.set_addr_map_veril: addr_lim 0x%0h is not 8-Byte-aligned",
+    if (EN_set_addr_map && set_addr_map_addr_lim[2:0] != 3'd0)
+      $display("%0d: WARNING: UART.set_addr_map: addr_lim 0x%0h is not 8-Byte-aligned",
 	       v__h5001,
-	       set_addr_map_veril_addr_lim);
+	       set_addr_map_addr_lim);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_receive && NOT_cfg_verbosity_read_ULE_1_37___d138)
 	$display("UART_Model.rl_receive: received char 0x%0h; new_lsr = 0x%0h",

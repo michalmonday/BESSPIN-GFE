@@ -899,8 +899,8 @@ module mkSoC_Top(CLK,
        flash_axi4_deburster_xactor_to_slave_f_wr_resp$FULL_N;
 
   // ports of submodule gpio
-  wire [63 : 0] gpio$set_addr_map_veril_addr_base,
-		gpio$set_addr_map_veril_addr_lim,
+  wire [63 : 0] gpio$set_addr_map_addr_base,
+		gpio$set_addr_map_addr_lim,
 		gpio$slave_araddr,
 		gpio$slave_awaddr,
 		gpio$slave_rdata,
@@ -924,7 +924,7 @@ module mkSoC_Top(CLK,
 	       gpio$slave_awburst,
 	       gpio$slave_bresp,
 	       gpio$slave_rresp;
-  wire gpio$EN_set_addr_map_veril,
+  wire gpio$EN_set_addr_map,
        gpio$assert_soft_reset,
        gpio$slave_arlock,
        gpio$slave_arready,
@@ -944,8 +944,8 @@ module mkSoC_Top(CLK,
   // ports of submodule mem0_controller
   wire [352 : 0] mem0_controller$to_raw_mem_request_get;
   wire [255 : 0] mem0_controller$to_raw_mem_response_put;
-  wire [63 : 0] mem0_controller$set_addr_map_veril_addr_base,
-		mem0_controller$set_addr_map_veril_addr_lim,
+  wire [63 : 0] mem0_controller$set_addr_map_addr_base,
+		mem0_controller$set_addr_map_addr_lim,
 		mem0_controller$set_watch_tohost_tohost_addr,
 		mem0_controller$slave_araddr,
 		mem0_controller$slave_awaddr,
@@ -974,13 +974,13 @@ module mkSoC_Top(CLK,
 	       mem0_controller$slave_rresp;
   wire mem0_controller$EN_server_reset_request_put,
        mem0_controller$EN_server_reset_response_get,
-       mem0_controller$EN_set_addr_map_veril,
+       mem0_controller$EN_set_addr_map,
        mem0_controller$EN_set_watch_tohost,
        mem0_controller$EN_to_raw_mem_request_get,
        mem0_controller$EN_to_raw_mem_response_put,
        mem0_controller$RDY_server_reset_request_put,
        mem0_controller$RDY_server_reset_response_get,
-       mem0_controller$RDY_set_addr_map_veril,
+       mem0_controller$RDY_set_addr_map,
        mem0_controller$RDY_to_raw_mem_request_get,
        mem0_controller$RDY_to_raw_mem_response_put,
        mem0_controller$set_watch_tohost_watch_tohost,
@@ -1110,24 +1110,24 @@ module mkSoC_Top(CLK,
   // ports of submodule sim_jtag
   wire sim_jtag$tclk, sim_jtag$tdi, sim_jtag$tdo, sim_jtag$tms;
 
-  // ports of submodule soc_map_veril
-  wire [63 : 0] soc_map_veril$m_boot_rom_addr_base,
-		soc_map_veril$m_boot_rom_addr_lim,
-		soc_map_veril$m_ddr4_0_cached_addr_lim,
-		soc_map_veril$m_ddr4_0_uncached_addr_base,
-		soc_map_veril$m_flash_mem_addr_base,
-		soc_map_veril$m_flash_mem_addr_lim,
-		soc_map_veril$m_gpio_0_addr_base,
-		soc_map_veril$m_gpio_0_addr_lim,
-		soc_map_veril$m_is_IO_addr_addr,
-		soc_map_veril$m_is_mem_addr_addr,
-		soc_map_veril$m_is_near_mem_IO_addr_addr,
-		soc_map_veril$m_uart16550_0_addr_base,
-		soc_map_veril$m_uart16550_0_addr_lim;
+  // ports of submodule soc_map
+  wire [63 : 0] soc_map$m_boot_rom_addr_base,
+		soc_map$m_boot_rom_addr_lim,
+		soc_map$m_ddr4_0_cached_addr_lim,
+		soc_map$m_ddr4_0_uncached_addr_base,
+		soc_map$m_flash_mem_addr_base,
+		soc_map$m_flash_mem_addr_lim,
+		soc_map$m_gpio_0_addr_base,
+		soc_map$m_gpio_0_addr_lim,
+		soc_map$m_is_IO_addr_addr,
+		soc_map$m_is_mem_addr_addr,
+		soc_map$m_is_near_mem_IO_addr_addr,
+		soc_map$m_uart16550_0_addr_base,
+		soc_map$m_uart16550_0_addr_lim;
 
   // ports of submodule uart0
-  wire [63 : 0] uart0$set_addr_map_veril_addr_base,
-		uart0$set_addr_map_veril_addr_lim,
+  wire [63 : 0] uart0$set_addr_map_addr_base,
+		uart0$set_addr_map_addr_lim,
 		uart0$slave_araddr,
 		uart0$slave_awaddr,
 		uart0$slave_rdata,
@@ -1159,7 +1159,7 @@ module mkSoC_Top(CLK,
        uart0$EN_put_from_console_put,
        uart0$EN_server_reset_request_put,
        uart0$EN_server_reset_response_get,
-       uart0$EN_set_addr_map_veril,
+       uart0$EN_set_addr_map,
        uart0$RDY_get_to_console_get,
        uart0$RDY_put_from_console_put,
        uart0$RDY_server_reset_request_put,
@@ -2072,8 +2072,8 @@ module mkSoC_Top(CLK,
   // submodule gpio
   mkGpio gpio(.CLK(CLK),
 	      .RST_N(RST_N),
-	      .set_addr_map_veril_addr_base(gpio$set_addr_map_veril_addr_base),
-	      .set_addr_map_veril_addr_lim(gpio$set_addr_map_veril_addr_lim),
+	      .set_addr_map_addr_base(gpio$set_addr_map_addr_base),
+	      .set_addr_map_addr_lim(gpio$set_addr_map_addr_lim),
 	      .slave_araddr(gpio$slave_araddr),
 	      .slave_arburst(gpio$slave_arburst),
 	      .slave_arcache(gpio$slave_arcache),
@@ -2102,8 +2102,8 @@ module mkSoC_Top(CLK,
 	      .slave_wlast(gpio$slave_wlast),
 	      .slave_wstrb(gpio$slave_wstrb),
 	      .slave_wvalid(gpio$slave_wvalid),
-	      .EN_set_addr_map_veril(gpio$EN_set_addr_map_veril),
-	      .RDY_set_addr_map_veril(),
+	      .EN_set_addr_map(gpio$EN_set_addr_map),
+	      .RDY_set_addr_map(),
 	      .slave_awready(gpio$slave_awready),
 	      .slave_wready(gpio$slave_wready),
 	      .slave_bvalid(gpio$slave_bvalid),
@@ -2121,8 +2121,8 @@ module mkSoC_Top(CLK,
   // submodule mem0_controller
   mkMem_Controller mem0_controller(.CLK(CLK),
 				   .RST_N(RST_N),
-				   .set_addr_map_veril_addr_base(mem0_controller$set_addr_map_veril_addr_base),
-				   .set_addr_map_veril_addr_lim(mem0_controller$set_addr_map_veril_addr_lim),
+				   .set_addr_map_addr_base(mem0_controller$set_addr_map_addr_base),
+				   .set_addr_map_addr_lim(mem0_controller$set_addr_map_addr_lim),
 				   .set_watch_tohost_tohost_addr(mem0_controller$set_watch_tohost_tohost_addr),
 				   .set_watch_tohost_watch_tohost(mem0_controller$set_watch_tohost_watch_tohost),
 				   .slave_araddr(mem0_controller$slave_araddr),
@@ -2156,13 +2156,13 @@ module mkSoC_Top(CLK,
 				   .to_raw_mem_response_put(mem0_controller$to_raw_mem_response_put),
 				   .EN_server_reset_request_put(mem0_controller$EN_server_reset_request_put),
 				   .EN_server_reset_response_get(mem0_controller$EN_server_reset_response_get),
-				   .EN_set_addr_map_veril(mem0_controller$EN_set_addr_map_veril),
+				   .EN_set_addr_map(mem0_controller$EN_set_addr_map),
 				   .EN_to_raw_mem_request_get(mem0_controller$EN_to_raw_mem_request_get),
 				   .EN_to_raw_mem_response_put(mem0_controller$EN_to_raw_mem_response_put),
 				   .EN_set_watch_tohost(mem0_controller$EN_set_watch_tohost),
 				   .RDY_server_reset_request_put(mem0_controller$RDY_server_reset_request_put),
 				   .RDY_server_reset_response_get(mem0_controller$RDY_server_reset_response_get),
-				   .RDY_set_addr_map_veril(mem0_controller$RDY_set_addr_map_veril),
+				   .RDY_set_addr_map(mem0_controller$RDY_set_addr_map),
 				   .slave_awready(mem0_controller$slave_awready),
 				   .slave_wready(mem0_controller$slave_wready),
 				   .slave_bvalid(mem0_controller$slave_bvalid),
@@ -2335,55 +2335,55 @@ module mkSoC_Top(CLK,
 		    .tms(sim_jtag$tms),
 		    .tclk(sim_jtag$tclk));
 
-  // submodule soc_map_veril
-  mkSoC_Map_Veril soc_map_veril(.CLK(CLK),
-				.RST_N(RST_N),
-				.m_is_IO_addr_addr(soc_map_veril$m_is_IO_addr_addr),
-				.m_is_mem_addr_addr(soc_map_veril$m_is_mem_addr_addr),
-				.m_is_near_mem_IO_addr_addr(soc_map_veril$m_is_near_mem_IO_addr_addr),
-				.m_plic_addr_base(),
-				.m_plic_addr_size(),
-				.m_plic_addr_lim(),
-				.m_near_mem_io_addr_base(),
-				.m_near_mem_io_addr_size(),
-				.m_near_mem_io_addr_lim(),
-				.m_flash_mem_addr_base(soc_map_veril$m_flash_mem_addr_base),
-				.m_flash_mem_addr_size(),
-				.m_flash_mem_addr_lim(soc_map_veril$m_flash_mem_addr_lim),
-				.m_ethernet_0_addr_base(),
-				.m_ethernet_0_addr_size(),
-				.m_ethernet_0_addr_lim(),
-				.m_dma_0_addr_base(),
-				.m_dma_0_addr_size(),
-				.m_dma_0_addr_lim(),
-				.m_uart16550_0_addr_base(soc_map_veril$m_uart16550_0_addr_base),
-				.m_uart16550_0_addr_size(),
-				.m_uart16550_0_addr_lim(soc_map_veril$m_uart16550_0_addr_lim),
-				.m_gpio_0_addr_base(soc_map_veril$m_gpio_0_addr_base),
-				.m_gpio_0_addr_size(),
-				.m_gpio_0_addr_lim(soc_map_veril$m_gpio_0_addr_lim),
-				.m_boot_rom_addr_base(soc_map_veril$m_boot_rom_addr_base),
-				.m_boot_rom_addr_size(),
-				.m_boot_rom_addr_lim(soc_map_veril$m_boot_rom_addr_lim),
-				.m_ddr4_0_uncached_addr_base(soc_map_veril$m_ddr4_0_uncached_addr_base),
-				.m_ddr4_0_uncached_addr_size(),
-				.m_ddr4_0_uncached_addr_lim(),
-				.m_ddr4_0_cached_addr_base(),
-				.m_ddr4_0_cached_addr_size(),
-				.m_ddr4_0_cached_addr_lim(soc_map_veril$m_ddr4_0_cached_addr_lim),
-				.m_is_mem_addr(),
-				.m_is_IO_addr(),
-				.m_is_near_mem_IO_addr(),
-				.m_pc_reset_value(),
-				.m_mtvec_reset_value(),
-				.m_nmivec_reset_value());
+  // submodule soc_map
+  mkSoC_Map_Veril soc_map(.CLK(CLK),
+			  .RST_N(RST_N),
+			  .m_is_IO_addr_addr(soc_map$m_is_IO_addr_addr),
+			  .m_is_mem_addr_addr(soc_map$m_is_mem_addr_addr),
+			  .m_is_near_mem_IO_addr_addr(soc_map$m_is_near_mem_IO_addr_addr),
+			  .m_plic_addr_base(),
+			  .m_plic_addr_size(),
+			  .m_plic_addr_lim(),
+			  .m_near_mem_io_addr_base(),
+			  .m_near_mem_io_addr_size(),
+			  .m_near_mem_io_addr_lim(),
+			  .m_flash_mem_addr_base(soc_map$m_flash_mem_addr_base),
+			  .m_flash_mem_addr_size(),
+			  .m_flash_mem_addr_lim(soc_map$m_flash_mem_addr_lim),
+			  .m_ethernet_0_addr_base(),
+			  .m_ethernet_0_addr_size(),
+			  .m_ethernet_0_addr_lim(),
+			  .m_dma_0_addr_base(),
+			  .m_dma_0_addr_size(),
+			  .m_dma_0_addr_lim(),
+			  .m_uart16550_0_addr_base(soc_map$m_uart16550_0_addr_base),
+			  .m_uart16550_0_addr_size(),
+			  .m_uart16550_0_addr_lim(soc_map$m_uart16550_0_addr_lim),
+			  .m_gpio_0_addr_base(soc_map$m_gpio_0_addr_base),
+			  .m_gpio_0_addr_size(),
+			  .m_gpio_0_addr_lim(soc_map$m_gpio_0_addr_lim),
+			  .m_boot_rom_addr_base(soc_map$m_boot_rom_addr_base),
+			  .m_boot_rom_addr_size(),
+			  .m_boot_rom_addr_lim(soc_map$m_boot_rom_addr_lim),
+			  .m_ddr4_0_uncached_addr_base(soc_map$m_ddr4_0_uncached_addr_base),
+			  .m_ddr4_0_uncached_addr_size(),
+			  .m_ddr4_0_uncached_addr_lim(),
+			  .m_ddr4_0_cached_addr_base(),
+			  .m_ddr4_0_cached_addr_size(),
+			  .m_ddr4_0_cached_addr_lim(soc_map$m_ddr4_0_cached_addr_lim),
+			  .m_is_mem_addr(),
+			  .m_is_IO_addr(),
+			  .m_is_near_mem_IO_addr(),
+			  .m_pc_reset_value(),
+			  .m_mtvec_reset_value(),
+			  .m_nmivec_reset_value());
 
   // submodule uart0
   mkUART uart0(.CLK(CLK),
 	       .RST_N(RST_N),
 	       .put_from_console_put(uart0$put_from_console_put),
-	       .set_addr_map_veril_addr_base(uart0$set_addr_map_veril_addr_base),
-	       .set_addr_map_veril_addr_lim(uart0$set_addr_map_veril_addr_lim),
+	       .set_addr_map_addr_base(uart0$set_addr_map_addr_base),
+	       .set_addr_map_addr_lim(uart0$set_addr_map_addr_lim),
 	       .slave_araddr(uart0$slave_araddr),
 	       .slave_arburst(uart0$slave_arburst),
 	       .slave_arcache(uart0$slave_arcache),
@@ -2414,12 +2414,12 @@ module mkSoC_Top(CLK,
 	       .slave_wvalid(uart0$slave_wvalid),
 	       .EN_server_reset_request_put(uart0$EN_server_reset_request_put),
 	       .EN_server_reset_response_get(uart0$EN_server_reset_response_get),
-	       .EN_set_addr_map_veril(uart0$EN_set_addr_map_veril),
+	       .EN_set_addr_map(uart0$EN_set_addr_map),
 	       .EN_get_to_console_get(uart0$EN_get_to_console_get),
 	       .EN_put_from_console_put(uart0$EN_put_from_console_put),
 	       .RDY_server_reset_request_put(uart0$RDY_server_reset_request_put),
 	       .RDY_server_reset_response_get(uart0$RDY_server_reset_response_get),
-	       .RDY_set_addr_map_veril(),
+	       .RDY_set_addr_map(),
 	       .slave_awready(uart0$slave_awready),
 	       .slave_wready(uart0$slave_wready),
 	       .slave_bvalid(uart0$slave_bvalid),
@@ -2543,7 +2543,7 @@ module mkSoC_Top(CLK,
 	      2'b0 ||
 	      !mem0_controller_axi4_deburster_rg_b_beat_count_ETC___d276) ;
   assign MUX_rg_state$write_1__SEL_1 =
-	     mem0_controller$RDY_set_addr_map_veril &&
+	     mem0_controller$RDY_set_addr_map &&
 	     mem0_controller$RDY_server_reset_response_get &&
 	     uart0$RDY_server_reset_response_get &&
 	     rg_state == 2'd2 ;
@@ -2772,9 +2772,8 @@ module mkSoC_Top(CLK,
 	     MUX_rg_state$write_1__SEL_1 || MUX_rg_state$write_1__SEL_2 ;
 
   // submodule boot_rom
-  assign boot_rom$set_addr_map_addr_base =
-	     soc_map_veril$m_boot_rom_addr_base ;
-  assign boot_rom$set_addr_map_addr_lim = soc_map_veril$m_boot_rom_addr_lim ;
+  assign boot_rom$set_addr_map_addr_base = soc_map$m_boot_rom_addr_base ;
+  assign boot_rom$set_addr_map_addr_lim = soc_map$m_boot_rom_addr_lim ;
   assign boot_rom$slave_araddr =
 	     boot_rom_axi4_deburster_xactor_to_slave_f_rd_addr$D_OUT[92:29] ;
   assign boot_rom$slave_arburst =
@@ -3189,8 +3188,8 @@ module mkSoC_Top(CLK,
   assign fabric$EN_set_verbosity = 1'b0 ;
 
   // submodule flash
-  assign flash$set_addr_map_addr_base = soc_map_veril$m_flash_mem_addr_base ;
-  assign flash$set_addr_map_addr_lim = soc_map_veril$m_flash_mem_addr_lim ;
+  assign flash$set_addr_map_addr_base = soc_map$m_flash_mem_addr_base ;
+  assign flash$set_addr_map_addr_lim = soc_map$m_flash_mem_addr_lim ;
   assign flash$slave_araddr =
 	     flash_axi4_deburster_xactor_to_slave_f_rd_addr$D_OUT[92:29] ;
   assign flash$slave_arburst =
@@ -3423,9 +3422,8 @@ module mkSoC_Top(CLK,
 	     flash_axi4_deburster_rg_reset ;
 
   // submodule gpio
-  assign gpio$set_addr_map_veril_addr_base =
-	     soc_map_veril$m_gpio_0_addr_base ;
-  assign gpio$set_addr_map_veril_addr_lim = soc_map_veril$m_gpio_0_addr_lim ;
+  assign gpio$set_addr_map_addr_base = soc_map$m_gpio_0_addr_base ;
+  assign gpio$set_addr_map_addr_lim = soc_map$m_gpio_0_addr_lim ;
   assign gpio$slave_araddr = fabric$v_to_slaves_4_araddr ;
   assign gpio$slave_arburst = fabric$v_to_slaves_4_arburst ;
   assign gpio$slave_arcache = fabric$v_to_slaves_4_arcache ;
@@ -3454,13 +3452,13 @@ module mkSoC_Top(CLK,
   assign gpio$slave_wlast = fabric$v_to_slaves_4_wlast ;
   assign gpio$slave_wstrb = fabric$v_to_slaves_4_wstrb ;
   assign gpio$slave_wvalid = fabric$v_to_slaves_4_wvalid ;
-  assign gpio$EN_set_addr_map_veril = MUX_rg_state$write_1__SEL_1 ;
+  assign gpio$EN_set_addr_map = MUX_rg_state$write_1__SEL_1 ;
 
   // submodule mem0_controller
-  assign mem0_controller$set_addr_map_veril_addr_base =
-	     soc_map_veril$m_ddr4_0_uncached_addr_base ;
-  assign mem0_controller$set_addr_map_veril_addr_lim =
-	     soc_map_veril$m_ddr4_0_cached_addr_lim ;
+  assign mem0_controller$set_addr_map_addr_base =
+	     soc_map$m_ddr4_0_uncached_addr_base ;
+  assign mem0_controller$set_addr_map_addr_lim =
+	     soc_map$m_ddr4_0_cached_addr_lim ;
   assign mem0_controller$set_watch_tohost_tohost_addr =
 	     set_watch_tohost_tohost_addr ;
   assign mem0_controller$set_watch_tohost_watch_tohost =
@@ -3526,7 +3524,7 @@ module mkSoC_Top(CLK,
 	     MUX_rg_state$write_1__SEL_2 ;
   assign mem0_controller$EN_server_reset_response_get =
 	     MUX_rg_state$write_1__SEL_1 ;
-  assign mem0_controller$EN_set_addr_map_veril = MUX_rg_state$write_1__SEL_1 ;
+  assign mem0_controller$EN_set_addr_map = MUX_rg_state$write_1__SEL_1 ;
   assign mem0_controller$EN_to_raw_mem_request_get =
 	     EN_to_raw_mem_request_get ;
   assign mem0_controller$EN_to_raw_mem_response_put =
@@ -3711,17 +3709,15 @@ module mkSoC_Top(CLK,
   // submodule sim_jtag
   assign sim_jtag$tdo = core$jtag_tdo ;
 
-  // submodule soc_map_veril
-  assign soc_map_veril$m_is_IO_addr_addr = 64'h0 ;
-  assign soc_map_veril$m_is_mem_addr_addr = 64'h0 ;
-  assign soc_map_veril$m_is_near_mem_IO_addr_addr = 64'h0 ;
+  // submodule soc_map
+  assign soc_map$m_is_IO_addr_addr = 64'h0 ;
+  assign soc_map$m_is_mem_addr_addr = 64'h0 ;
+  assign soc_map$m_is_near_mem_IO_addr_addr = 64'h0 ;
 
   // submodule uart0
   assign uart0$put_from_console_put = put_from_console_put ;
-  assign uart0$set_addr_map_veril_addr_base =
-	     soc_map_veril$m_uart16550_0_addr_base ;
-  assign uart0$set_addr_map_veril_addr_lim =
-	     soc_map_veril$m_uart16550_0_addr_lim ;
+  assign uart0$set_addr_map_addr_base = soc_map$m_uart16550_0_addr_base ;
+  assign uart0$set_addr_map_addr_lim = soc_map$m_uart16550_0_addr_lim ;
   assign uart0$slave_araddr = fabric$v_to_slaves_2_araddr ;
   assign uart0$slave_arburst = fabric$v_to_slaves_2_arburst ;
   assign uart0$slave_arcache = fabric$v_to_slaves_2_arcache ;
@@ -3752,7 +3748,7 @@ module mkSoC_Top(CLK,
   assign uart0$slave_wvalid = fabric$v_to_slaves_2_wvalid ;
   assign uart0$EN_server_reset_request_put = MUX_rg_state$write_1__SEL_2 ;
   assign uart0$EN_server_reset_response_get = MUX_rg_state$write_1__SEL_1 ;
-  assign uart0$EN_set_addr_map_veril = MUX_rg_state$write_1__SEL_1 ;
+  assign uart0$EN_set_addr_map = MUX_rg_state$write_1__SEL_1 ;
   assign uart0$EN_get_to_console_get = EN_get_to_console_get ;
   assign uart0$EN_put_from_console_put = EN_put_from_console_put ;
 

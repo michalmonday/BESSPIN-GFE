@@ -1110,20 +1110,20 @@ module mkSoC_Top(CLK,
   // ports of submodule sim_jtag
   wire sim_jtag$tclk, sim_jtag$tdi, sim_jtag$tdo, sim_jtag$tms;
 
-  // ports of submodule soc_map_veril
-  wire [63 : 0] soc_map_veril$m_boot_rom_addr_base,
-		soc_map_veril$m_boot_rom_addr_lim,
-		soc_map_veril$m_ddr4_0_cached_addr_lim,
-		soc_map_veril$m_ddr4_0_uncached_addr_base,
-		soc_map_veril$m_flash_mem_addr_base,
-		soc_map_veril$m_flash_mem_addr_lim,
-		soc_map_veril$m_gpio_0_addr_base,
-		soc_map_veril$m_gpio_0_addr_lim,
-		soc_map_veril$m_is_IO_addr_addr,
-		soc_map_veril$m_is_mem_addr_addr,
-		soc_map_veril$m_is_near_mem_IO_addr_addr,
-		soc_map_veril$m_uart16550_0_addr_base,
-		soc_map_veril$m_uart16550_0_addr_lim;
+  // ports of submodule soc_map
+  wire [63 : 0] soc_map$m_boot_rom_addr_base,
+		soc_map$m_boot_rom_addr_lim,
+		soc_map$m_ddr4_0_cached_addr_lim,
+		soc_map$m_ddr4_0_uncached_addr_base,
+		soc_map$m_flash_mem_addr_base,
+		soc_map$m_flash_mem_addr_lim,
+		soc_map$m_gpio_0_addr_base,
+		soc_map$m_gpio_0_addr_lim,
+		soc_map$m_is_IO_addr_addr,
+		soc_map$m_is_mem_addr_addr,
+		soc_map$m_is_near_mem_IO_addr_addr,
+		soc_map$m_uart16550_0_addr_base,
+		soc_map$m_uart16550_0_addr_lim;
 
   // ports of submodule uart0
   wire [63 : 0] uart0$set_addr_map_addr_base,
@@ -2335,48 +2335,48 @@ module mkSoC_Top(CLK,
 		    .tms(sim_jtag$tms),
 		    .tclk(sim_jtag$tclk));
 
-  // submodule soc_map_veril
-  mkSoC_Map_Veril soc_map_veril(.CLK(CLK),
-				.RST_N(RST_N),
-				.m_is_IO_addr_addr(soc_map_veril$m_is_IO_addr_addr),
-				.m_is_mem_addr_addr(soc_map_veril$m_is_mem_addr_addr),
-				.m_is_near_mem_IO_addr_addr(soc_map_veril$m_is_near_mem_IO_addr_addr),
-				.m_plic_addr_base(),
-				.m_plic_addr_size(),
-				.m_plic_addr_lim(),
-				.m_near_mem_io_addr_base(),
-				.m_near_mem_io_addr_size(),
-				.m_near_mem_io_addr_lim(),
-				.m_flash_mem_addr_base(soc_map_veril$m_flash_mem_addr_base),
-				.m_flash_mem_addr_size(),
-				.m_flash_mem_addr_lim(soc_map_veril$m_flash_mem_addr_lim),
-				.m_ethernet_0_addr_base(),
-				.m_ethernet_0_addr_size(),
-				.m_ethernet_0_addr_lim(),
-				.m_dma_0_addr_base(),
-				.m_dma_0_addr_size(),
-				.m_dma_0_addr_lim(),
-				.m_uart16550_0_addr_base(soc_map_veril$m_uart16550_0_addr_base),
-				.m_uart16550_0_addr_size(),
-				.m_uart16550_0_addr_lim(soc_map_veril$m_uart16550_0_addr_lim),
-				.m_gpio_0_addr_base(soc_map_veril$m_gpio_0_addr_base),
-				.m_gpio_0_addr_size(),
-				.m_gpio_0_addr_lim(soc_map_veril$m_gpio_0_addr_lim),
-				.m_boot_rom_addr_base(soc_map_veril$m_boot_rom_addr_base),
-				.m_boot_rom_addr_size(),
-				.m_boot_rom_addr_lim(soc_map_veril$m_boot_rom_addr_lim),
-				.m_ddr4_0_uncached_addr_base(soc_map_veril$m_ddr4_0_uncached_addr_base),
-				.m_ddr4_0_uncached_addr_size(),
-				.m_ddr4_0_uncached_addr_lim(),
-				.m_ddr4_0_cached_addr_base(),
-				.m_ddr4_0_cached_addr_size(),
-				.m_ddr4_0_cached_addr_lim(soc_map_veril$m_ddr4_0_cached_addr_lim),
-				.m_is_mem_addr(),
-				.m_is_IO_addr(),
-				.m_is_near_mem_IO_addr(),
-				.m_pc_reset_value(),
-				.m_mtvec_reset_value(),
-				.m_nmivec_reset_value());
+  // submodule soc_map
+  mkSoC_Map_Veril soc_map(.CLK(CLK),
+			  .RST_N(RST_N),
+			  .m_is_IO_addr_addr(soc_map$m_is_IO_addr_addr),
+			  .m_is_mem_addr_addr(soc_map$m_is_mem_addr_addr),
+			  .m_is_near_mem_IO_addr_addr(soc_map$m_is_near_mem_IO_addr_addr),
+			  .m_plic_addr_base(),
+			  .m_plic_addr_size(),
+			  .m_plic_addr_lim(),
+			  .m_near_mem_io_addr_base(),
+			  .m_near_mem_io_addr_size(),
+			  .m_near_mem_io_addr_lim(),
+			  .m_flash_mem_addr_base(soc_map$m_flash_mem_addr_base),
+			  .m_flash_mem_addr_size(),
+			  .m_flash_mem_addr_lim(soc_map$m_flash_mem_addr_lim),
+			  .m_ethernet_0_addr_base(),
+			  .m_ethernet_0_addr_size(),
+			  .m_ethernet_0_addr_lim(),
+			  .m_dma_0_addr_base(),
+			  .m_dma_0_addr_size(),
+			  .m_dma_0_addr_lim(),
+			  .m_uart16550_0_addr_base(soc_map$m_uart16550_0_addr_base),
+			  .m_uart16550_0_addr_size(),
+			  .m_uart16550_0_addr_lim(soc_map$m_uart16550_0_addr_lim),
+			  .m_gpio_0_addr_base(soc_map$m_gpio_0_addr_base),
+			  .m_gpio_0_addr_size(),
+			  .m_gpio_0_addr_lim(soc_map$m_gpio_0_addr_lim),
+			  .m_boot_rom_addr_base(soc_map$m_boot_rom_addr_base),
+			  .m_boot_rom_addr_size(),
+			  .m_boot_rom_addr_lim(soc_map$m_boot_rom_addr_lim),
+			  .m_ddr4_0_uncached_addr_base(soc_map$m_ddr4_0_uncached_addr_base),
+			  .m_ddr4_0_uncached_addr_size(),
+			  .m_ddr4_0_uncached_addr_lim(),
+			  .m_ddr4_0_cached_addr_base(),
+			  .m_ddr4_0_cached_addr_size(),
+			  .m_ddr4_0_cached_addr_lim(soc_map$m_ddr4_0_cached_addr_lim),
+			  .m_is_mem_addr(),
+			  .m_is_IO_addr(),
+			  .m_is_near_mem_IO_addr(),
+			  .m_pc_reset_value(),
+			  .m_mtvec_reset_value(),
+			  .m_nmivec_reset_value());
 
   // submodule uart0
   mkUART uart0(.CLK(CLK),
@@ -2772,9 +2772,8 @@ module mkSoC_Top(CLK,
 	     MUX_rg_state$write_1__SEL_1 || MUX_rg_state$write_1__SEL_2 ;
 
   // submodule boot_rom
-  assign boot_rom$set_addr_map_addr_base =
-	     soc_map_veril$m_boot_rom_addr_base ;
-  assign boot_rom$set_addr_map_addr_lim = soc_map_veril$m_boot_rom_addr_lim ;
+  assign boot_rom$set_addr_map_addr_base = soc_map$m_boot_rom_addr_base ;
+  assign boot_rom$set_addr_map_addr_lim = soc_map$m_boot_rom_addr_lim ;
   assign boot_rom$slave_araddr =
 	     boot_rom_axi4_deburster_xactor_to_slave_f_rd_addr$D_OUT[92:29] ;
   assign boot_rom$slave_arburst =
@@ -3189,8 +3188,8 @@ module mkSoC_Top(CLK,
   assign fabric$EN_set_verbosity = 1'b0 ;
 
   // submodule flash
-  assign flash$set_addr_map_addr_base = soc_map_veril$m_flash_mem_addr_base ;
-  assign flash$set_addr_map_addr_lim = soc_map_veril$m_flash_mem_addr_lim ;
+  assign flash$set_addr_map_addr_base = soc_map$m_flash_mem_addr_base ;
+  assign flash$set_addr_map_addr_lim = soc_map$m_flash_mem_addr_lim ;
   assign flash$slave_araddr =
 	     flash_axi4_deburster_xactor_to_slave_f_rd_addr$D_OUT[92:29] ;
   assign flash$slave_arburst =
@@ -3423,8 +3422,8 @@ module mkSoC_Top(CLK,
 	     flash_axi4_deburster_rg_reset ;
 
   // submodule gpio
-  assign gpio$set_addr_map_addr_base = soc_map_veril$m_gpio_0_addr_base ;
-  assign gpio$set_addr_map_addr_lim = soc_map_veril$m_gpio_0_addr_lim ;
+  assign gpio$set_addr_map_addr_base = soc_map$m_gpio_0_addr_base ;
+  assign gpio$set_addr_map_addr_lim = soc_map$m_gpio_0_addr_lim ;
   assign gpio$slave_araddr = fabric$v_to_slaves_4_araddr ;
   assign gpio$slave_arburst = fabric$v_to_slaves_4_arburst ;
   assign gpio$slave_arcache = fabric$v_to_slaves_4_arcache ;
@@ -3457,9 +3456,9 @@ module mkSoC_Top(CLK,
 
   // submodule mem0_controller
   assign mem0_controller$set_addr_map_addr_base =
-	     soc_map_veril$m_ddr4_0_uncached_addr_base ;
+	     soc_map$m_ddr4_0_uncached_addr_base ;
   assign mem0_controller$set_addr_map_addr_lim =
-	     soc_map_veril$m_ddr4_0_cached_addr_lim ;
+	     soc_map$m_ddr4_0_cached_addr_lim ;
   assign mem0_controller$set_watch_tohost_tohost_addr =
 	     set_watch_tohost_tohost_addr ;
   assign mem0_controller$set_watch_tohost_watch_tohost =
@@ -3710,16 +3709,15 @@ module mkSoC_Top(CLK,
   // submodule sim_jtag
   assign sim_jtag$tdo = core$jtag_tdo ;
 
-  // submodule soc_map_veril
-  assign soc_map_veril$m_is_IO_addr_addr = 64'h0 ;
-  assign soc_map_veril$m_is_mem_addr_addr = 64'h0 ;
-  assign soc_map_veril$m_is_near_mem_IO_addr_addr = 64'h0 ;
+  // submodule soc_map
+  assign soc_map$m_is_IO_addr_addr = 64'h0 ;
+  assign soc_map$m_is_mem_addr_addr = 64'h0 ;
+  assign soc_map$m_is_near_mem_IO_addr_addr = 64'h0 ;
 
   // submodule uart0
   assign uart0$put_from_console_put = put_from_console_put ;
-  assign uart0$set_addr_map_addr_base =
-	     soc_map_veril$m_uart16550_0_addr_base ;
-  assign uart0$set_addr_map_addr_lim = soc_map_veril$m_uart16550_0_addr_lim ;
+  assign uart0$set_addr_map_addr_base = soc_map$m_uart16550_0_addr_base ;
+  assign uart0$set_addr_map_addr_lim = soc_map$m_uart16550_0_addr_lim ;
   assign uart0$slave_araddr = fabric$v_to_slaves_2_araddr ;
   assign uart0$slave_arburst = fabric$v_to_slaves_2_arburst ;
   assign uart0$slave_arcache = fabric$v_to_slaves_2_arcache ;
