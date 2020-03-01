@@ -12,7 +12,7 @@ package P_Core;
 import AXI4_Types   :: *;
 import AXI4_Fabric  :: *;
 import Fabric_Defs  :: *;
-import SoC_Map_Veril  :: *;
+import `SoC_Map:: *;
 import JtagTap ::*;
 import Giraffe_IFC ::*;
 

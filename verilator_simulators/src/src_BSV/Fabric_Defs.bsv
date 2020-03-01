@@ -29,7 +29,7 @@ import AXI4_Types :: *;
 
 // ----------------
 // Width of fabric 'id' buses
-typedef  6             Wd_Id;
+typedef  `WD_ID        Wd_Id;
 typedef  Bit #(Wd_Id)  Fabric_Id;
 
 // ----------------

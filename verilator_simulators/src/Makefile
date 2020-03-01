@@ -15,11 +15,17 @@ endif
 # ================================================================
 # RISC-V config macros passed into Bluespec 'bsc' compiler
 
+WD_ID ?= 4
+
 BSC_COMPILATION_FLAGS += \
 	-D SHIFT_BARREL    \
 	-D MULT_SYNTH    \
 	-D Near_Mem_Caches    \
 	-D FABRIC64    \
+	-D WD_ID=$(WD_ID)    \
+	-D SoC_Map=SoC_Map$(SOC_MAP_SUFFIX)    \
+	-D SoC_Map_IFC=SoC_Map$(SOC_MAP_SUFFIX)_IFC    \
+	-D mkSoC_Map=mkSoC_Map$(SOC_MAP_SUFFIX)    \
 	-D INCLUDE_GDB_CONTROL  \
 	-D ACTUAL_GDB -D JTAG_TAP \
 

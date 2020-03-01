@@ -72,7 +72,7 @@ import ByteLane   :: *;
 // Project imports
 
 import Fabric_Defs :: *;
-import SoC_Map_Veril     :: *;
+import `SoC_Map:: *;
 import AXI4_Types  :: *;
 
 // ================================================================

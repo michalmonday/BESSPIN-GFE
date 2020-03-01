@@ -40,7 +40,7 @@ import AXI4_Fabric    :: *;
 import AXI4_Deburster :: *;
 
 import Fabric_Defs :: *;
-import SoC_Map_Veril     :: *;
+import `SoC_Map:: *;
 import SoC_Fabric  :: *;
 
 // SoC components (CPU, mem, and IPs)
@@ -104,7 +104,7 @@ module mkSoC_Top (SoC_Top_IFC);
    Reg #(SoC_State) rg_state <- mkReg (SOC_START);
 
    // SoC address map specifying base and limit for memories, IPs, etc.
-   SoC_Map_Veril_IFC soc_map_veril <- mkSoC_Map_Veril;
+   `SoC_Map_IFC soc_map <- `mkSoC_Map;
 
    // We keep the processor in reset until after rg_state has become SOC_IDLE:
    Reg#(Bool) cpu_initial_reset <- mkReg(True);
@@ -162,7 +162,7 @@ module mkSoC_Top (SoC_Top_IFC);
 
    // ----------------
    // SoC fabric master connections
-   // Note: see 'SoC_Map_Veril' for 'master_num' definitions
+   // Note: see 'SoC_Map' for 'master_num' definitions
 
    // CPU IMem master to fabric
    mkConnection (core.master0,  fabric.v_from_masters [imem_master_num]);
@@ -177,7 +177,7 @@ module mkSoC_Top (SoC_Top_IFC);
 
    // ----------------
    // SoC fabric slave connections
-   // Note: see 'SoC_Map_Veril' for 'slave_num' definitions
+   // Note: see 'SoC_Map' for 'slave_num' definitions
 
    // Fabric to Boot ROM
    mkConnection (fabric.v_to_slaves [boot_rom_slave_num], boot_rom_axi4_deburster.from_master);
@@ -257,24 +257,24 @@ module mkSoC_Top (SoC_Top_IFC);
       let uart0_rsp           <- uart0.server_reset.response.get;
 
       // Initialize address maps of slave IPs
-      boot_rom.set_addr_map (soc_map_veril.m_boot_rom_addr_base,
-			     soc_map_veril.m_boot_rom_addr_lim);
+      boot_rom.set_addr_map (soc_map.m_boot_rom_addr_base,
+			     soc_map.m_boot_rom_addr_lim);
 
-      mem0_controller.set_addr_map (soc_map_veril.m_ddr4_0_uncached_addr_base,
-				    soc_map_veril.m_ddr4_0_cached_addr_lim);
+      mem0_controller.set_addr_map (soc_map.m_ddr4_0_uncached_addr_base,
+				    soc_map.m_ddr4_0_cached_addr_lim);
 
-      uart0.set_addr_map (soc_map_veril.m_uart16550_0_addr_base, soc_map_veril.m_uart16550_0_addr_lim);
+      uart0.set_addr_map (soc_map.m_uart16550_0_addr_base, soc_map.m_uart16550_0_addr_lim);
 
-      flash.set_addr_map (soc_map_veril.m_flash_mem_addr_base,
-			     soc_map_veril.m_flash_mem_addr_lim);
+      flash.set_addr_map (soc_map.m_flash_mem_addr_base,
+			     soc_map.m_flash_mem_addr_lim);
 
-      gpio.set_addr_map (soc_map_veril.m_gpio_0_addr_base,
-			     soc_map_veril.m_gpio_0_addr_lim);
+      gpio.set_addr_map (soc_map.m_gpio_0_addr_base,
+			     soc_map.m_gpio_0_addr_lim);
 
 `ifdef INCLUDE_ACCEL0
       accel0.init (fabric_default_id,
-		   soc_map_veril.m_accel0_addr_base,
-		   soc_map_veril.m_accel0_addr_lim);
+		   soc_map.m_accel0_addr_base,
+		   soc_map.m_accel0_addr_lim);
 `endif
 
       rg_state <= SOC_IDLE;
@@ -283,24 +283,24 @@ module mkSoC_Top (SoC_Top_IFC);
       if (verbosity != 0) begin
 	 $display ("  SoC address map:");
 	 $display ("  Boot ROM:        0x%0h .. 0x%0h",
-		   soc_map_veril.m_boot_rom_addr_base,
-		   soc_map_veril.m_boot_rom_addr_lim);
+		   soc_map.m_boot_rom_addr_base,
+		   soc_map.m_boot_rom_addr_lim);
 	 $display ("  Mem0 Controller: 0x%0h .. 0x%0h",
-		   soc_map_veril.m_ddr4_0_cached_addr_base,
-		   soc_map_veril.m_ddr4_0_cached_addr_lim);
+		   soc_map.m_ddr4_0_cached_addr_base,
+		   soc_map.m_ddr4_0_cached_addr_lim);
 	 $display ("  UART0:           0x%0h .. 0x%0h",
-		   soc_map_veril.m_uart16550_0_addr_base,
-		   soc_map_veril.m_uart16550_0_addr_lim);
+		   soc_map.m_uart16550_0_addr_base,
+		   soc_map.m_uart16550_0_addr_lim);
 	 $display ("  Flash:           0x%0h .. 0x%0h",
-		   soc_map_veril.m_flash_mem_addr_base,
-		   soc_map_veril.m_flash_mem_addr_lim);
+		   soc_map.m_flash_mem_addr_base,
+		   soc_map.m_flash_mem_addr_lim);
 	 $display ("  Gpio:           0x%0h .. 0x%0h",
-		   soc_map_veril.m_gpio_0_addr_base,
-		   soc_map_veril.m_gpio_0_addr_lim);
+		   soc_map.m_gpio_0_addr_base,
+		   soc_map.m_gpio_0_addr_lim);
 `ifdef INCLUDE_ACCEL0
 	 $display ("  Accel:          0x%0h .. 0x%0h",
-		   soc_map_veril.m_accel0_addr_base,
-		   soc_map_veril.m_accel0_addr_lim);
+		   soc_map.m_accel0_addr_base,
+		   soc_map.m_accel0_addr_lim);
 `endif
       end
    endrule
