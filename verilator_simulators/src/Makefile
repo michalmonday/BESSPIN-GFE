@@ -86,6 +86,7 @@ ifeq ($(strip $(PROC)),)
 else
 	@echo  "INFO: Verilog RTL generation ..."
 	bsc -u -elab -verilog  $(RTL_GEN_DIRS)  $(BSC_COMPILATION_FLAGS)  $(BSC_PATH)  $(TOPFILE)
+	rm -f ../procs/$(PROC)/mkP_Core.v ../procs/$(PROC)/mkJtagTap.v
 	cp src_Verilog/* ../Verilog_RTL
 	@echo  "INFO: Verilog RTL generation finished"
 endif
