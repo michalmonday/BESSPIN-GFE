@@ -105,7 +105,8 @@ module mkFlash (Flash_IFC);
 	 $display ("%0d: ERROR: Boot_ROM.rl_process_rd_req: unrecognized or misaligned addr",  cur_cycle);
 	 $display ("    ", fshow (rda));
       end
-      else data64 = data64 >> (Bit#(8))'(extend(rda.araddr [2:0]) * 8);
+      else if (valueOf (Wd_Data) == 32)
+	 data64 = data64 >> (Bit#(8))'(extend({rda.araddr [2], 2'b0}) * 8);
 
       Bit #(Wd_Data) rdata  = truncate (data64);
       let rdr = AXI4_Rd_Data {rid:   rda.arid,
