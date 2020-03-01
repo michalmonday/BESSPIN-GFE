@@ -286,29 +286,26 @@ module mkBoot_ROM(CLK,
 
   // declarations used by system tasks
   // synopsys translate_off
-  reg [31 : 0] v__h888;
-  reg [31 : 0] v__h6546;
-  reg [31 : 0] v__h6835;
-  reg [31 : 0] v__h6945;
-  reg [31 : 0] v__h882;
-  reg [31 : 0] v__h6540;
-  reg [31 : 0] v__h6829;
-  reg [31 : 0] v__h6939;
+  reg [31 : 0] v__h887;
+  reg [31 : 0] v__h6497;
+  reg [31 : 0] v__h6786;
+  reg [31 : 0] v__h6896;
+  reg [31 : 0] v__h881;
+  reg [31 : 0] v__h6491;
+  reg [31 : 0] v__h6780;
+  reg [31 : 0] v__h6890;
   // synopsys translate_on
 
   // remaining internal signals
-  reg [63 : 0] data64__h708;
+  reg [63 : 0] rdata__h999;
   reg [31 : 0] CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q2,
 	       CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q3;
   reg CASE_slave_xactor_f_rd_addrD_OUT_BITS_20_TO_1_ETC__q4,
       CASE_slave_xactor_f_wr_addrD_OUT_BITS_20_TO_1_ETC__q5;
-  wire [63 : 0] data64__h862,
-		rdata__h1000,
-		slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_MIN_ETC__q1;
-  wire [7 : 0] x__h6192;
-  wire [1 : 0] rdr_rresp__h1033;
+  wire [63 : 0] slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_MIN_ETC__q1;
+  wire [1 : 0] rdr_rresp__h1032;
   wire IF_slave_xactor_f_rd_addr_first_BITS_20_TO_18__ETC___d31,
-       IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241;
+       IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238;
 
   // action method set_addr_map
   assign RDY_set_addr_map = 1'd1 ;
@@ -446,8 +443,8 @@ module mkBoot_ROM(CLK,
   // submodule slave_xactor_f_rd_data
   assign slave_xactor_f_rd_data$D_IN =
 	     { slave_xactor_f_rd_addr$D_OUT[98:93],
-	       rdata__h1000,
-	       rdr_rresp__h1033,
+	       rdata__h999,
+	       rdr_rresp__h1032,
 	       1'd1 } ;
   assign slave_xactor_f_rd_data$ENQ = WILL_FIRE_RL_rl_process_rd_req ;
   assign slave_xactor_f_rd_data$DEQ =
@@ -482,7 +479,7 @@ module mkBoot_ROM(CLK,
   // submodule slave_xactor_f_wr_resp
   assign slave_xactor_f_wr_resp$D_IN =
 	     { slave_xactor_f_wr_addr$D_OUT[98:93],
-	       IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241 ?
+	       IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238 ?
 		 2'b10 :
 		 2'b0 } ;
   assign slave_xactor_f_wr_resp$ENQ = WILL_FIRE_RL_rl_process_wr_req ;
@@ -495,22 +492,16 @@ module mkBoot_ROM(CLK,
 	     CASE_slave_xactor_f_rd_addrD_OUT_BITS_20_TO_1_ETC__q4 ||
 	     rg_addr_base > slave_xactor_f_rd_addr$D_OUT[92:29] ||
 	     slave_xactor_f_rd_addr$D_OUT[92:29] >= rg_addr_lim ;
-  assign IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241 =
+  assign IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238 =
 	     CASE_slave_xactor_f_wr_addrD_OUT_BITS_20_TO_1_ETC__q5 ||
 	     rg_addr_base > slave_xactor_f_wr_addr$D_OUT[92:29] ||
 	     slave_xactor_f_wr_addr$D_OUT[92:29] >= rg_addr_lim ;
-  assign data64__h862 = data64__h708 >> x__h6192 ;
-  assign rdata__h1000 =
-	     IF_slave_xactor_f_rd_addr_first_BITS_20_TO_18__ETC___d31 ?
-	       data64__h708 :
-	       data64__h862 ;
-  assign rdr_rresp__h1033 =
+  assign rdr_rresp__h1032 =
 	     IF_slave_xactor_f_rd_addr_first_BITS_20_TO_18__ETC___d31 ?
 	       2'b10 :
 	       2'b0 ;
   assign slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_MIN_ETC__q1 =
 	     slave_xactor_f_rd_addr$D_OUT[92:29] - rg_addr_base ;
-  assign x__h6192 = { 2'd0, slave_xactor_f_rd_addr$D_OUT[31:29], 3'd0 } ;
   always@(slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_MIN_ETC__q1)
   begin
     case (slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_MIN_ETC__q1[63:3])
@@ -1816,9 +1807,9 @@ module mkBoot_ROM(CLK,
 	  CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q3)
   begin
     case (slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_MIN_ETC__q1[63:3])
-      61'd0: data64__h708 = 64'h0202859300000297;
-      61'd1: data64__h708 = 64'h0182B283F1402573;
-      default: data64__h708 =
+      61'd0: rdata__h999 = 64'h0202859300000297;
+      61'd1: rdata__h999 = 64'h0182B283F1402573;
+      default: rdata__h999 =
 		   { CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q2,
 		     CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q3 };
     endcase
@@ -1896,15 +1887,15 @@ module mkBoot_ROM(CLK,
       if (WILL_FIRE_RL_rl_process_rd_req &&
 	  IF_slave_xactor_f_rd_addr_first_BITS_20_TO_18__ETC___d31)
 	begin
-	  v__h888 = $stime;
+	  v__h887 = $stime;
 	  #0;
 	end
-    v__h882 = v__h888 / 32'd10;
+    v__h881 = v__h887 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_rd_req &&
 	  IF_slave_xactor_f_rd_addr_first_BITS_20_TO_18__ETC___d31)
 	$display("%0d: ERROR: Boot_ROM.rl_process_rd_req: unrecognized or misaligned addr",
-		 v__h882);
+		 v__h881);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_rd_req &&
 	  IF_slave_xactor_f_rd_addr_first_BITS_20_TO_18__ETC___d31)
@@ -2003,136 +1994,136 @@ module mkBoot_ROM(CLK,
 	$write("\n");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	begin
-	  v__h6546 = $stime;
+	  v__h6497 = $stime;
 	  #0;
 	end
-    v__h6540 = v__h6546 / 32'd10;
+    v__h6491 = v__h6497 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$display("%0d: ERROR: Boot_ROM.rl_process_wr_req: unrecognized addr",
-		 v__h6540);
+		 v__h6491);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("    ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("AXI4_Wr_Addr { ", "awid: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[98:93]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write(", ", "awaddr: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[92:29]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write(", ", "awlen: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[28:21]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write(", ", "awsize: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[20:18]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write(", ", "awburst: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[17:16]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write(", ", "awlock: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[15]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write(", ", "awcache: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[14:11]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write(", ", "awprot: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[10:8]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write(", ", "awqos: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[7:4]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write(", ", "awregion: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[3:0]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write(", ", "awuser: ");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("'h%h", 1'd0, " }");
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
-	  IF_slave_xactor_f_wr_addr_first__218_BITS_20_T_ETC___d1241)
+	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
 	$write("\n");
     if (RST_N != `BSV_RESET_VALUE)
       if (EN_set_addr_map && set_addr_map_addr_base[2:0] != 3'd0)
 	begin
-	  v__h6835 = $stime;
+	  v__h6786 = $stime;
 	  #0;
 	end
-    v__h6829 = v__h6835 / 32'd10;
+    v__h6780 = v__h6786 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
       if (EN_set_addr_map && set_addr_map_addr_base[2:0] != 3'd0)
 	$display("%0d: WARNING: Boot_ROM.set_addr_map: addr_base 0x%0h is not 4-Byte-aligned",
-		 v__h6829,
+		 v__h6780,
 		 set_addr_map_addr_base);
     if (RST_N != `BSV_RESET_VALUE)
       if (EN_set_addr_map && set_addr_map_addr_lim[2:0] != 3'd0)
 	begin
-	  v__h6945 = $stime;
+	  v__h6896 = $stime;
 	  #0;
 	end
-    v__h6939 = v__h6945 / 32'd10;
+    v__h6890 = v__h6896 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
       if (EN_set_addr_map && set_addr_map_addr_lim[2:0] != 3'd0)
 	$display("%0d: WARNING: Boot_ROM.set_addr_map: addr_lim 0x%0h is not 4-Byte-aligned",
-		 v__h6939,
+		 v__h6890,
 		 set_addr_map_addr_lim);
   end
   // synopsys translate_on
