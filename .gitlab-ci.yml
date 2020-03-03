@@ -303,7 +303,11 @@ BSV_P2_isa:
       - test_processor.log
 
 BSV_P2_freertos_gcc:
+  # XXX-CHERI: Patch FreeRTOS clock speed only for P2. Remove after GFE merge
+  # to get clock speed override in pytest_processor.py.
   script:
+    - sed 's/_CLOCK_HZ ((uint32_t)(100000000))/_CLOCK_HZ ((uint32_t)(50000000))/' FreeRTOS-mirror/FreeRTOS/Demo/RISC-V_Galois_P1/FreeRTOSConfig.h > FreeRTOS-mirror/FreeRTOS/Demo/RISC-V_Galois_P1/FreeRTOSConfig.h.new
+    - mv FreeRTOS-mirror/FreeRTOS/Demo/RISC-V_Galois_P1/FreeRTOSConfig.h.new FreeRTOS-mirror/FreeRTOS/Demo/RISC-V_Galois_P1/FreeRTOSConfig.h
     - ./pytest_processor.py bluespec_p2 --freertos
   tags: ["fpga"]
   artifacts:
@@ -313,7 +317,11 @@ BSV_P2_freertos_gcc:
       - test_processor.log
 
 BSV_P2_freertos_network_gcc:
+  # XXX-CHERI: Patch FreeRTOS clock speed only for P2. Remove after GFE merge
+  # to get clock speed override in pytest_processor.py.
   script:
+    - sed 's/_CLOCK_HZ ((uint32_t)(100000000))/_CLOCK_HZ ((uint32_t)(50000000))/' FreeRTOS-mirror/FreeRTOS/Demo/RISC-V_Galois_P1/FreeRTOSConfig.h > FreeRTOS-mirror/FreeRTOS/Demo/RISC-V_Galois_P1/FreeRTOSConfig.h.new
+    - mv FreeRTOS-mirror/FreeRTOS/Demo/RISC-V_Galois_P1/FreeRTOSConfig.h.new FreeRTOS-mirror/FreeRTOS/Demo/RISC-V_Galois_P1/FreeRTOSConfig.h
     - ./pytest_processor.py bluespec_p2 --freertos --network
   tags: ["fpga-network"]
   except:
