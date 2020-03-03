@@ -80,7 +80,7 @@ class Config(object):
     
     def get_busybox_config(self):
         expected_contents = {'boot': ["Please press Enter to activate this console"],
-                            'ping': ["Please press Enter to activate this console"]}
+                            'ping': ["xilinx_axienet 62100000.ethernet","Link is Up"]}
 
         absent_contents = {'boot': None,
                             'ping': None}
