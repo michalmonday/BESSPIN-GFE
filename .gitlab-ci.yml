@@ -11,6 +11,7 @@ before_script:
   - export RISCV=/opt/riscv
   - export PATH=/opt/Xilinx/Vivado/2019.1/bin:/opt/Xilinx/Vivado_Lab/2019.1/bin:$PATH
   - echo $PATH
+  - test ! -e FreeRTOS-mirror/FreeRTOS/Demo/RISC-V_Galois_P1/FreeRTOSConfig.h || git -C FreeRTOS-mirror checkout FreeRTOS/Demo/RISC-V_Galois_P1/FreeRTOSConfig.h
   - ./init_submodules.sh
   - source /opt/Xilinx/Vivado_Lab/2019.1/settings64.sh
   - export XILINXD_LICENSE_FILE=/opt/Xilinx/Xilinx.lic
