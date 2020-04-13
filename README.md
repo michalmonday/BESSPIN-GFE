@@ -238,7 +238,7 @@ We expect to see warnings about memory alignment and timer demo functions when c
 Follow these steps to run freeRTOS with an interactive GDB session:
 
 1. Reset the SoC by pressing the CPU_RESET button (SW5) on the VCU118 before running FreeRTOS.
-2. Run OpenOCD to connect to the riscv core `openocd -f $GFE_REPO/testing/targets/ssith_gfe.cfg`.
+2. Run OpenOCD to connect to the riscv core `openocd -f $GFE_REPO/testing/targets/ssith_gfe.cfg`.  Note: openocd will fail if it cannot connect over JTAG, e.g. if Vivado programmer is still active.
 3. In a new terminal, run minicom with `minicom -D /dev/ttyUSB1 -b 115200`. `ttyUSB1` should be replaced with whichever USB port is connected to the VCU118's USB-to-UART bridge.
 Settings can be configured by running `minicom -s` and selecting `Serial Port Setup` and then `Bps/Par/Bits`. 
 The UART is configured to have 8 data bits, 2 stop bits, no parity bits, and a baud rate of 115200.
