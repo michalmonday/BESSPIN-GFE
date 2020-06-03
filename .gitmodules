@@ -17,7 +17,7 @@
 	url = ../riscv-linux.git
 [submodule "bluespec-processors/P3/Toooba"]
 	path = bluespec-processors/P3/Toooba
-	url = https://github.com/bluespec/Toooba.git
+	url = https://github.com/CTSRD-CHERI/Toooba.git
 [submodule "riscv-pk"]
 	path = riscv-pk
 	url = ../riscv-pk.git
