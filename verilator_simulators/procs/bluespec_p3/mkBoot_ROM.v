@@ -10,11 +10,11 @@
 // slave_awready                  O     1 reg
 // slave_wready                   O     1 reg
 // slave_bvalid                   O     1 reg
-// slave_bid                      O     4 reg
+// slave_bid                      O     6 reg
 // slave_bresp                    O     2 reg
 // slave_arready                  O     1 reg
 // slave_rvalid                   O     1 reg
-// slave_rid                      O     4 reg
+// slave_rid                      O     6 reg
 // slave_rdata                    O    64 reg
 // slave_rresp                    O     2 reg
 // slave_rlast                    O     1 reg
@@ -23,7 +23,7 @@
 // set_addr_map_addr_base         I    64 reg
 // set_addr_map_addr_lim          I    64 reg
 // slave_awvalid                  I     1
-// slave_awid                     I     4 reg
+// slave_awid                     I     6 reg
 // slave_awaddr                   I    64 reg
 // slave_awlen                    I     8 reg
 // slave_awsize                   I     3 reg
@@ -39,7 +39,7 @@
 // slave_wlast                    I     1 reg
 // slave_bready                   I     1
 // slave_arvalid                  I     1
-// slave_arid                     I     4 reg
+// slave_arid                     I     6 reg
 // slave_araddr                   I    64 reg
 // slave_arlen                    I     8 reg
 // slave_arsize                   I     3 reg
@@ -142,7 +142,7 @@ module mkBoot_ROM(CLK,
 
   // action method slave_m_awvalid
   input  slave_awvalid;
-  input  [3 : 0] slave_awid;
+  input  [5 : 0] slave_awid;
   input  [63 : 0] slave_awaddr;
   input  [7 : 0] slave_awlen;
   input  [2 : 0] slave_awsize;
@@ -169,7 +169,7 @@ module mkBoot_ROM(CLK,
   output slave_bvalid;
 
   // value method slave_m_bid
-  output [3 : 0] slave_bid;
+  output [5 : 0] slave_bid;
 
   // value method slave_m_bresp
   output [1 : 0] slave_bresp;
@@ -181,7 +181,7 @@ module mkBoot_ROM(CLK,
 
   // action method slave_m_arvalid
   input  slave_arvalid;
-  input  [3 : 0] slave_arid;
+  input  [5 : 0] slave_arid;
   input  [63 : 0] slave_araddr;
   input  [7 : 0] slave_arlen;
   input  [2 : 0] slave_arsize;
@@ -199,7 +199,7 @@ module mkBoot_ROM(CLK,
   output slave_rvalid;
 
   // value method slave_m_rid
-  output [3 : 0] slave_rid;
+  output [5 : 0] slave_rid;
 
   // value method slave_m_rdata
   output [63 : 0] slave_rdata;
@@ -217,7 +217,7 @@ module mkBoot_ROM(CLK,
 
   // signals for module outputs
   wire [63 : 0] slave_rdata;
-  wire [3 : 0] slave_bid, slave_rid;
+  wire [5 : 0] slave_bid, slave_rid;
   wire [1 : 0] slave_bresp, slave_rresp;
   wire RDY_set_addr_map,
        slave_arready,
@@ -242,7 +242,7 @@ module mkBoot_ROM(CLK,
   wire rg_module_ready$D_IN, rg_module_ready$EN;
 
   // ports of submodule slave_xactor_f_rd_addr
-  wire [96 : 0] slave_xactor_f_rd_addr$D_IN, slave_xactor_f_rd_addr$D_OUT;
+  wire [98 : 0] slave_xactor_f_rd_addr$D_IN, slave_xactor_f_rd_addr$D_OUT;
   wire slave_xactor_f_rd_addr$CLR,
        slave_xactor_f_rd_addr$DEQ,
        slave_xactor_f_rd_addr$EMPTY_N,
@@ -250,7 +250,7 @@ module mkBoot_ROM(CLK,
        slave_xactor_f_rd_addr$FULL_N;
 
   // ports of submodule slave_xactor_f_rd_data
-  wire [70 : 0] slave_xactor_f_rd_data$D_IN, slave_xactor_f_rd_data$D_OUT;
+  wire [72 : 0] slave_xactor_f_rd_data$D_IN, slave_xactor_f_rd_data$D_OUT;
   wire slave_xactor_f_rd_data$CLR,
        slave_xactor_f_rd_data$DEQ,
        slave_xactor_f_rd_data$EMPTY_N,
@@ -258,7 +258,7 @@ module mkBoot_ROM(CLK,
        slave_xactor_f_rd_data$FULL_N;
 
   // ports of submodule slave_xactor_f_wr_addr
-  wire [96 : 0] slave_xactor_f_wr_addr$D_IN, slave_xactor_f_wr_addr$D_OUT;
+  wire [98 : 0] slave_xactor_f_wr_addr$D_IN, slave_xactor_f_wr_addr$D_OUT;
   wire slave_xactor_f_wr_addr$CLR,
        slave_xactor_f_wr_addr$DEQ,
        slave_xactor_f_wr_addr$EMPTY_N,
@@ -274,7 +274,7 @@ module mkBoot_ROM(CLK,
        slave_xactor_f_wr_data$FULL_N;
 
   // ports of submodule slave_xactor_f_wr_resp
-  wire [5 : 0] slave_xactor_f_wr_resp$D_IN, slave_xactor_f_wr_resp$D_OUT;
+  wire [7 : 0] slave_xactor_f_wr_resp$D_IN, slave_xactor_f_wr_resp$D_OUT;
   wire slave_xactor_f_wr_resp$CLR,
        slave_xactor_f_wr_resp$DEQ,
        slave_xactor_f_wr_resp$EMPTY_N,
@@ -320,7 +320,7 @@ module mkBoot_ROM(CLK,
   assign slave_bvalid = slave_xactor_f_wr_resp$EMPTY_N ;
 
   // value method slave_m_bid
-  assign slave_bid = slave_xactor_f_wr_resp$D_OUT[5:2] ;
+  assign slave_bid = slave_xactor_f_wr_resp$D_OUT[7:2] ;
 
   // value method slave_m_bresp
   assign slave_bresp = slave_xactor_f_wr_resp$D_OUT[1:0] ;
@@ -332,7 +332,7 @@ module mkBoot_ROM(CLK,
   assign slave_rvalid = slave_xactor_f_rd_data$EMPTY_N ;
 
   // value method slave_m_rid
-  assign slave_rid = slave_xactor_f_rd_data$D_OUT[70:67] ;
+  assign slave_rid = slave_xactor_f_rd_data$D_OUT[72:67] ;
 
   // value method slave_m_rdata
   assign slave_rdata = slave_xactor_f_rd_data$D_OUT[66:3] ;
@@ -344,7 +344,7 @@ module mkBoot_ROM(CLK,
   assign slave_rlast = slave_xactor_f_rd_data$D_OUT[0] ;
 
   // submodule slave_xactor_f_rd_addr
-  FIFO2 #(.width(32'd97), .guarded(32'd1)) slave_xactor_f_rd_addr(.RST(RST_N),
+  FIFO2 #(.width(32'd99), .guarded(32'd1)) slave_xactor_f_rd_addr(.RST(RST_N),
 								  .CLK(CLK),
 								  .D_IN(slave_xactor_f_rd_addr$D_IN),
 								  .ENQ(slave_xactor_f_rd_addr$ENQ),
@@ -355,7 +355,7 @@ module mkBoot_ROM(CLK,
 								  .EMPTY_N(slave_xactor_f_rd_addr$EMPTY_N));
 
   // submodule slave_xactor_f_rd_data
-  FIFO2 #(.width(32'd71), .guarded(32'd1)) slave_xactor_f_rd_data(.RST(RST_N),
+  FIFO2 #(.width(32'd73), .guarded(32'd1)) slave_xactor_f_rd_data(.RST(RST_N),
 								  .CLK(CLK),
 								  .D_IN(slave_xactor_f_rd_data$D_IN),
 								  .ENQ(slave_xactor_f_rd_data$ENQ),
@@ -366,7 +366,7 @@ module mkBoot_ROM(CLK,
 								  .EMPTY_N(slave_xactor_f_rd_data$EMPTY_N));
 
   // submodule slave_xactor_f_wr_addr
-  FIFO2 #(.width(32'd97), .guarded(32'd1)) slave_xactor_f_wr_addr(.RST(RST_N),
+  FIFO2 #(.width(32'd99), .guarded(32'd1)) slave_xactor_f_wr_addr(.RST(RST_N),
 								  .CLK(CLK),
 								  .D_IN(slave_xactor_f_wr_addr$D_IN),
 								  .ENQ(slave_xactor_f_wr_addr$ENQ),
@@ -388,7 +388,7 @@ module mkBoot_ROM(CLK,
 								  .EMPTY_N(slave_xactor_f_wr_data$EMPTY_N));
 
   // submodule slave_xactor_f_wr_resp
-  FIFO2 #(.width(32'd6), .guarded(32'd1)) slave_xactor_f_wr_resp(.RST(RST_N),
+  FIFO2 #(.width(32'd8), .guarded(32'd1)) slave_xactor_f_wr_resp(.RST(RST_N),
 								 .CLK(CLK),
 								 .D_IN(slave_xactor_f_wr_resp$D_IN),
 								 .ENQ(slave_xactor_f_wr_resp$ENQ),
@@ -442,7 +442,7 @@ module mkBoot_ROM(CLK,
 
   // submodule slave_xactor_f_rd_data
   assign slave_xactor_f_rd_data$D_IN =
-	     { slave_xactor_f_rd_addr$D_OUT[96:93],
+	     { slave_xactor_f_rd_addr$D_OUT[98:93],
 	       rdata__h999,
 	       rdr_rresp__h1032,
 	       1'd1 } ;
@@ -478,7 +478,7 @@ module mkBoot_ROM(CLK,
 
   // submodule slave_xactor_f_wr_resp
   assign slave_xactor_f_wr_resp$D_IN =
-	     { slave_xactor_f_wr_addr$D_OUT[96:93],
+	     { slave_xactor_f_wr_addr$D_OUT[98:93],
 	       IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238 ?
 		 2'b10 :
 		 2'b0 } ;
@@ -1807,11 +1807,10 @@ module mkBoot_ROM(CLK,
 	  CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q3)
   begin
     case (slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_MIN_ETC__q1[63:3])
-      61'd0: rdata__h999 = 64'h0202859300000297;
-      61'd1: rdata__h999 = 64'h0182B283F1402573;
-      default: rdata__h999 =
-		   { CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q2,
-		     CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q3 };
+      61'd0: rdata__h999 = 64'h0125051300000517;
+      61'd1: rdata__h999 = 64'hf140257330551073;
+      61'd2: rdata__h999 = 64'h00000000a001a001;
+      default: rdata__h999 = 0;
     endcase
   end
   always@(slave_xactor_f_rd_addr$D_OUT)
@@ -1907,7 +1906,7 @@ module mkBoot_ROM(CLK,
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_rd_req &&
 	  IF_slave_xactor_f_rd_addr_first_BITS_20_TO_18__ETC___d31)
-	$write("'h%h", slave_xactor_f_rd_addr$D_OUT[96:93]);
+	$write("'h%h", slave_xactor_f_rd_addr$D_OUT[98:93]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_rd_req &&
 	  IF_slave_xactor_f_rd_addr_first_BITS_20_TO_18__ETC___d31)
@@ -2016,7 +2015,7 @@ module mkBoot_ROM(CLK,
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
 	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
-	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[96:93]);
+	$write("'h%h", slave_xactor_f_wr_addr$D_OUT[98:93]);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_rl_process_wr_req &&
 	  IF_slave_xactor_f_wr_addr_first__215_BITS_20_T_ETC___d1238)
