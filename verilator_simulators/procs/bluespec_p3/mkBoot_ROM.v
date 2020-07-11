@@ -1807,10 +1807,11 @@ module mkBoot_ROM(CLK,
 	  CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q3)
   begin
     case (slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_MIN_ETC__q1[63:3])
-      61'd0: rdata__h999 = 64'h0125051300000517;
-      61'd1: rdata__h999 = 64'hf140257330551073;
-      61'd2: rdata__h999 = 64'h00000000a001a001;
-      default: rdata__h999 = 0;
+      61'd0: rdata__h999 = 64'h0202859300000297;
+      61'd1: rdata__h999 = 64'h0182B283F1402573;
+      default: rdata__h999 =
+		   { CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q2,
+		     CASE_slave_xactor_f_rd_addrD_OUT_BITS_92_TO_29_ETC__q3 };
     endcase
   end
   always@(slave_xactor_f_rd_addr$D_OUT)
