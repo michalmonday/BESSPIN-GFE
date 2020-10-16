@@ -1,3 +1,11 @@
+#if CPU_SPEED == 0
+#if __riscv_xlen == 32
+#define CPU_SPEED 50000000
+#else
+#define CPU_SPEED 100000000
+#endif
+#endif
+
 /dts-v1/;
 
 / {
@@ -12,30 +20,20 @@
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
-		timebase-frequency = <50000000>;
+		timebase-frequency = <CPU_SPEED>;
 		CPU0: cpu@0 {
 			device_type = "cpu";
 			reg = <0>;
 			status = "okay";
 			compatible = "riscv";
+#if __riscv_xlen == 32
+			riscv,isa = "rv32imac";
+#else
 			riscv,isa = "rv64imafdc";
 			mmu-type = "riscv,sv39";
-			clock-frequency = <50000000>;
+#endif
+			clock-frequency = <CPU_SPEED>;
 			CPU0_intc: interrupt-controller {
-				#interrupt-cells = <1>;
-				interrupt-controller;
-				compatible = "riscv,cpu-intc";
-			};
-		};
-		CPU1: cpu@1 {
-			device_type = "cpu";
-			reg = <0>;
-			status = "okay";
-			compatible = "riscv";
-			riscv,isa = "rv64imafdc";
-			mmu-type = "riscv,sv39";
-			clock-frequency = <50000000>;
-			CPU1_intc: interrupt-controller {
 				#interrupt-cells = <1>;
 				interrupt-controller;
 				compatible = "riscv,cpu-intc";
@@ -70,14 +68,14 @@
 		ranges;
 		clint@10000000 {
 			compatible = "riscv,clint0";
-			interrupts-extended = <&CPU0_intc 3 &CPU0_intc 7 &CPU1_intc 3 &CPU1_intc 7>;
+			interrupts-extended = <&CPU0_intc 3 &CPU0_intc 7>;
 			reg = <0x10000000 0x10000>;
 		};
 		plic: interrupt-controller@11000000 {
 			#interrupt-cells = <1>;
 			compatible = "riscv,plic0";
 			interrupt-controller;
-			interrupts-extended = <&CPU0_intc 11 &CPU0_intc 9 &CPU1_intc 11 &CPU1_intc 9>;
+			interrupts-extended = <&CPU0_intc 11 &CPU0_intc 9>;
 			reg = <0xc000000 0x400000>;
 			reg-names = "control";
 			riscv,max-priority = <7>;
@@ -99,7 +97,7 @@
 			phy-handle = <&phy0>;
 			xlnx,vcu118;
 			local-mac-address = [00 0a 35 04 db 5a];
-			clock-frequency = <50000000>;
+			clock-frequency = <CPU_SPEED>;
 			axi_ethernet_mdio: mdio {
 				#address-cells = <1>;
 				#size-cells = <0>;
@@ -123,7 +121,7 @@
 			compatible = "ns16550a";
 			interrupts-extended = <&plic 1>;
 			reg = <0x62300000 0x1000>;
-			clock-frequency = <50000000>;
+			clock-frequency = <CPU_SPEED>;
 			reg-shift = <2>;
 		};
 		pci: pci@20000000 {

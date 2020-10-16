@@ -3,7 +3,7 @@ bootrom_rev_mem = bootrom.bytereversed.mem
 bootrom_mem = bootrom.mem
 bootrom_coe = bootrom.coe
 
-CPU_SPEED?=50000000
+CPU_SPEED?=0
 CROSS_COMPILE?=riscv64-unknown-elf-
 CPP=$(CROSS_COMPILE)cpp
 GCC=$(CROSS_COMPILE)gcc
