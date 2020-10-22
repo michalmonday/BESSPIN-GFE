@@ -39,7 +39,7 @@ VERILATOR_FLAGS += -LDFLAGS "-static -L ${GLIBC_STATIC}/lib"
 
 # Verilator flags: use the following to include code to generate VCDs
 # Select trace-depth according to your module hierarchy
-VERILATOR_FLAGS += --trace -CFLAGS -DVM_TRACE
+VERILATOR_FLAGS += --trace --trace-depth 10 -CFLAGS -DVM_TRACE
 
 VTOP                = V$(TOPMODULE)
 VERILATOR_RESOURCES = Resources
@@ -99,7 +99,7 @@ endif
 	sed  -f $(VERILATOR_RESOURCES)/sed_script2.txt  $(PROCESSOR_RTL)/$(TOPNAME).v > tmp2.v
 	mv tmp2.v Verilog_RTL/mkP_Core.v
 	verilator \
-		-IProcessor/Boot_ROM \
+		-Iprocs/$(PROC) \
 		-I$(PROCESSOR_RTL) \
 		-IVerilog_RTL \
 		--top-module mkTop_HW_Side \
