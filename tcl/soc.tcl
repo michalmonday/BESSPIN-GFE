@@ -167,8 +167,10 @@ set_property "ip_repo_paths" [list \
 source $origin_dir/soc_bd.tcl
 
 if {$no_xdma == 1} {
-    puts "Building with svf instead of xdma"
-    source $origin_dir/svf.tcl
+    puts "Building without xdma"
+    source $origin_dir/no_xdma.tcl
+    #puts "Building with svf"
+    #source $origin_dir/svf.tcl
 }
 
 # Configure the clock frequency
