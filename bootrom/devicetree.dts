@@ -8,6 +8,9 @@
 #if RTC_FREQ == 0
 #define RTC_FREQ CPU_SPEED
 #endif
+#if MEM_SIZE == 0
+#define MEM_SIZE 0x3f000000
+#endif
 
 /dts-v1/;
 
@@ -45,7 +48,7 @@
 	};
 	memory {
 		device_type = "memory";
-		reg = <0xC0000000 0x3f000000>;
+		reg = <0xC0000000 MEM_SIZE>;
 	};
 	reserved-memory {
 		#address-cells = <1>;
