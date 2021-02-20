@@ -5,12 +5,49 @@
 #define CPU_SPEED 100000000
 #endif
 #endif
+
 #if RTC_FREQ == 0
 #define RTC_FREQ CPU_SPEED
 #endif
+
 #if MEM_SIZE == 0
 #define MEM_SIZE 0x3f000000
 #endif
+
+#if __riscv_xlen == 32
+#define _CPU_RISCV_ISA riscv,isa = "rv32imac";
+#define _CPU_MMU_TYPE
+#elif __riscv_xlen == 64
+#define _CPU_RISCV_ISA riscv,isa = "rv64imafdc";
+#define _CPU_MMU_TYPE mmu-type = "riscv,sv39";
+#else
+#error "Unsupported XLEN"
+#endif
+
+#define _MAX_SUPPORTED_CORES 4
+#if NUM_CORES > _MAX_SUPPORTED_CORES
+#error "More cores requested than currently supported."
+#endif
+
+#define _DECLARE_CPU(_n) \
+	CPU##_n: cpu@##_n { \
+		device_type = "cpu"; \
+		reg = <_n>; \
+		status = "okay"; \
+		compatible = "riscv"; \
+		_CPU_RISCV_ISA \
+		_CPU_MMU_TYPE \
+		clock-frequency = <CPU_SPEED>; \
+		CPU##_n##_intc: interrupt-controller { \
+			#interrupt-cells = <1>; \
+			interrupt-controller; \
+			compatible = "riscv,cpu-intc"; \
+		}; \
+	};
+
+#define _DECLARE_CPU_CLINT(_n) &CPU##_n##_intc 3 &CPU##_n##_intc 7
+
+#define _DECLARE_CPU_PLIC(_n) &CPU##_n##_intc 11 &CPU##_n##_intc 9
 
 /dts-v1/;
 
@@ -21,30 +58,22 @@
 	model = "unknown,unknown";
 	chosen {
 		bootargs = "earlyprintk console=ttyS0,115200 loglevel=15";
-                stdout-path = &ns16550;
+		stdout-path = &ns16550;
 	};
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
 		timebase-frequency = <RTC_FREQ>;
-		CPU0: cpu@0 {
-			device_type = "cpu";
-			reg = <0>;
-			status = "okay";
-			compatible = "riscv";
-#if __riscv_xlen == 32
-			riscv,isa = "rv32imac";
-#else
-			riscv,isa = "rv64imafdc";
-			mmu-type = "riscv,sv39";
+		_DECLARE_CPU(0)
+#if NUM_CORES > 1
+		_DECLARE_CPU(1)
 #endif
-			clock-frequency = <CPU_SPEED>;
-			CPU0_intc: interrupt-controller {
-				#interrupt-cells = <1>;
-				interrupt-controller;
-				compatible = "riscv,cpu-intc";
-			};
-		};
+#if NUM_CORES > 2
+		_DECLARE_CPU(2)
+#endif
+#if NUM_CORES > 3
+		_DECLARE_CPU(3)
+#endif
 	};
 	memory {
 		device_type = "memory";
@@ -74,14 +103,36 @@
 		ranges;
 		clint@10000000 {
 			compatible = "riscv,clint0";
-			interrupts-extended = <&CPU0_intc 3 &CPU0_intc 7>;
+			interrupts-extended = <
+				_DECLARE_CPU_CLINT(0)
+#if NUM_CORES > 1
+				_DECLARE_CPU_CLINT(1)
+#endif
+#if NUM_CORES > 2
+				_DECLARE_CPU_CLINT(2)
+#endif
+#if NUM_CORES > 3
+				_DECLARE_CPU_CLINT(3)
+#endif
+				>;
 			reg = <0x10000000 0x10000>;
 		};
 		plic: interrupt-controller@11000000 {
 			#interrupt-cells = <1>;
 			compatible = "riscv,plic0";
 			interrupt-controller;
-			interrupts-extended = <&CPU0_intc 11 &CPU0_intc 9>;
+			interrupts-extended = <
+				_DECLARE_CPU_PLIC(0)
+#if NUM_CORES > 1
+				_DECLARE_CPU_PLIC(1)
+#endif
+#if NUM_CORES > 2
+				_DECLARE_CPU_PLIC(2)
+#endif
+#if NUM_CORES > 3
+				_DECLARE_CPU_PLIC(3)
+#endif
+				>;
 			reg = <0xc000000 0x400000>;
 			reg-names = "control";
 			riscv,max-priority = <7>;
@@ -144,7 +195,7 @@
 		     ranges = <0x02000000 0x0 0x30000000  0x30000000  0x0 0x10000000>;
 		     reg = <0x20000000 0x10000000>;
 		     pcie_intc_0: interrupt-controller {
-		         interrupt-controller;
+			 interrupt-controller;
 			 #address-cells = <0>;
 			 #interrupt-cells = <1>;
 		     };

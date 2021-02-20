@@ -7,6 +7,7 @@ NO_PCI?=0
 CPU_SPEED?=0
 RTC_FREQ?=0
 MEM_SIZE?=0
+NUM_CORES?=1
 CROSS_COMPILE?=riscv64-unknown-elf-
 CPP=$(CROSS_COMPILE)cpp
 GCC=$(CROSS_COMPILE)gcc
@@ -36,7 +37,7 @@ all: $(bootrom_img) $(bootrom_mem) $(bootrom_coe) $(bootrom_rev_mem)
 	$(OBJDUMP) -d $< > $@
 
 %.dtb: %.dts
-	$(CPP) -x assembler-with-cpp -DCPU_SPEED=$(CPU_SPEED) -DRTC_FREQ=$(RTC_FREQ) -DMEM_SIZE=$(MEM_SIZE) -DNO_PCI=$(NO_PCI) $< | $(DTC) -O dtb -o $@
+	$(CPP) -x assembler-with-cpp -DCPU_SPEED=$(CPU_SPEED) -DRTC_FREQ=$(RTC_FREQ) -DMEM_SIZE=$(MEM_SIZE) -DNO_PCI=$(NO_PCI) -DNUM_CORES=$(NUM_CORES) $< | $(DTC) -O dtb -o $@
 
 %.elf: %.S linker.ld devicetree.dtb
 	$(GCC) -Tlinker.ld $< -nostdlib -static -Wl,--no-gc-sections -o $@
