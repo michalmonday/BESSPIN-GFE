@@ -214,11 +214,18 @@ set obj [get_filesets sim_1]
 set_property -name "top" -value "design_1" -objects $obj
 set_property -name "verilog_define" -value "RANDOMIZE_GARBAGE_ASSIGN RANDOMIZE_INVALID_ASSIGN RANDOMIZE_REG_INIT RANDOMIZE_MEM_INIT RANDOMIZE_DELAY=0" -objects $obj
 
+# Special case: increase chances of bluespec_p3 routing correctly
+if { [string equal $proc_name "bluespec_p3"] } {
+    set strat "Flow_AlternateRoutability"
+} else {
+    set strat {Vivado Synthesis Defaults}
+}
+
 # Create 'synth_1' run (if not found)
 if {[string equal [get_runs -quiet synth_1] ""]} {
-    create_run -name synth_1 -part xcvu9p-flga2104-2L-e -flow {Vivado Synthesis 2017} -strategy {Vivado Synthesis Defaults} -report_strategy {No Reports} -constrset constrs_1
+    create_run -name synth_1 -part xcvu9p-flga2104-2L-e -flow {Vivado Synthesis 2017} -strategy $strat -report_strategy {No Reports} -constrset constrs_1
 } else {
-  set_property strategy {Vivado Synthesis Defaults} [get_runs synth_1]
+  set_property strategy $strat [get_runs synth_1]
   set_property flow "Vivado Synthesis 2017" [get_runs synth_1]
 }
 
