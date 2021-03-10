@@ -23,7 +23,7 @@
 	url = https://github.com/riscv/riscv-pk.git
 [submodule "riscv-tests"]
 	path = riscv-tests
-	url = https://github.com/riscv/riscv-tests.git
+	url = ../riscv-tests.git
 [submodule "busybox"]
 	path = busybox
 	url = https://github.com/mirror/busybox.git
