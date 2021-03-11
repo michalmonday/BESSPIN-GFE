@@ -41,6 +41,12 @@ VERILATOR_FLAGS += -LDFLAGS "-static -L ${GLIBC_STATIC}/lib"
 # Select trace-depth according to your module hierarchy
 VERILATOR_FLAGS += --trace --trace-depth 10 -CFLAGS -DVM_TRACE
 
+# XXX: Allow lint_off DEPRECATED for older Verilator versions.
+#      This was added around the same time as -msg was deprecated, so we need
+#      to suppress the deprecation messages without breaking older versions.
+#      See verilator_config.vlt. Remove once 4.026 can be relied upon.
+VERILATOR_FLAGS += -Wfuture-DEPRECATED
+
 VTOP                = V$(TOPMODULE)
 VERILATOR_RESOURCES = Resources
 
