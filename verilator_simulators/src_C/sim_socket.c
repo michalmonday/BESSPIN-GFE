@@ -24,8 +24,6 @@ extern "C" {
 #endif
 
 int socket_open(int port) {
-    assert(port > 0);
-
     DEBUG_PRINTF("%s\n", __PRETTY_FUNCTION__);
 
     int ret;
@@ -40,7 +38,7 @@ int socket_open(int port) {
     }
 
     sockaddr.sin_family = AF_INET;
-    sockaddr.sin_port = htons(port);
+    sockaddr.sin_port = htons(port == -1 ? 0 : port);
     sockaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
     ret = bind(s, (struct sockaddr *)&sockaddr, sizeof(sockaddr));
