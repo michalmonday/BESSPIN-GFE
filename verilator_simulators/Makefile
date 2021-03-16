@@ -84,7 +84,7 @@ endif
 	@echo "INFO: Linking verilated files"
 	cp  -p  src_C/sim_main.cpp  obj_dir/sim_main.cpp
 	cd obj_dir; \
-	   make -j -f V$(TOPMODULE).mk  $(VTOP); \
+	   $(MAKE) -j -f V$(TOPMODULE).mk  $(VTOP); \
 	   cp -p  $(VTOP)  ../$(SIM_EXE_FILE)
 	rm Verilog_RTL/mkP_Core.v Verilog_RTL/mkSoC_Top.v Verilog_RTL/$(TOPMODULE).v
 	@echo "INFO: Created verilator executable:    $(SIM_EXE_FILE)"
@@ -117,7 +117,7 @@ endif
 	@echo "INFO: Linking verilated files"
 	cp  -p  src_C/sim_main.cpp  obj_dir/sim_main.cpp
 	cd obj_dir; \
-	   make -j -f V$(TOPMODULE).mk  $(VTOP); \
+	   $(MAKE) -j -f V$(TOPMODULE).mk  $(VTOP); \
 	   cp -p  $(VTOP)  ../$(SIM_EXE_FILE)
 	rm Verilog_RTL/mkP_Core.v Verilog_RTL/mkSoC_Top.v Verilog_RTL/$(TOPMODULE).v
 	@echo "INFO: Created verilator executable:    $(SIM_EXE_FILE)"
