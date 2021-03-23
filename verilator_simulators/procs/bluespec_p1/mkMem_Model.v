@@ -84,7 +84,7 @@ module mkMem_Model(CLK,
   // synopsys translate_on
 
   // remaining internal signals
-  wire mem_server_request_put_BITS_319_TO_256_ULT_0x4_ETC___d2;
+  wire mem_server_request_put_BITS_319_TO_256_ULT_0x8_ETC___d2;
 
   // action method mem_server_request_put
   assign RDY_mem_server_request_put = f_raw_mem_rsps$FULL_N ;
@@ -109,7 +109,7 @@ module mkMem_Model(CLK,
 		.addr_width(32'd64),
 		.data_width(32'd256),
 		.lo(64'd0),
-		.hi(64'd67108863),
+		.hi(64'd134217727),
 		.binary(1'd0)) rf(.CLK(CLK),
 				  .ADDR_1(rf$ADDR_1),
 				  .ADDR_2(rf$ADDR_2),
@@ -129,7 +129,7 @@ module mkMem_Model(CLK,
   assign f_raw_mem_rsps$D_IN = rf$D_OUT_1 ;
   assign f_raw_mem_rsps$ENQ =
 	     EN_mem_server_request_put &&
-	     mem_server_request_put_BITS_319_TO_256_ULT_0x4_ETC___d2 &&
+	     mem_server_request_put_BITS_319_TO_256_ULT_0x8_ETC___d2 &&
 	     !mem_server_request_put[352] ;
   assign f_raw_mem_rsps$DEQ = EN_mem_server_response_get ;
   assign f_raw_mem_rsps$CLR = 1'b0 ;
@@ -144,12 +144,12 @@ module mkMem_Model(CLK,
   assign rf$D_IN = mem_server_request_put[255:0] ;
   assign rf$WE =
 	     EN_mem_server_request_put &&
-	     mem_server_request_put_BITS_319_TO_256_ULT_0x4_ETC___d2 &&
+	     mem_server_request_put_BITS_319_TO_256_ULT_0x8_ETC___d2 &&
 	     mem_server_request_put[352] ;
 
   // remaining internal signals
-  assign mem_server_request_put_BITS_319_TO_256_ULT_0x4_ETC___d2 =
-	     mem_server_request_put[319:256] < 64'h0000000004000000 ;
+  assign mem_server_request_put_BITS_319_TO_256_ULT_0x8_ETC___d2 =
+	     mem_server_request_put[319:256] < 64'h0000000008000000 ;
 
   // handling of system tasks
 
@@ -159,7 +159,7 @@ module mkMem_Model(CLK,
     #0;
     if (RST_N != `BSV_RESET_VALUE)
       if (EN_mem_server_request_put &&
-	  !mem_server_request_put_BITS_319_TO_256_ULT_0x4_ETC___d2)
+	  !mem_server_request_put_BITS_319_TO_256_ULT_0x8_ETC___d2)
 	begin
 	  v__h371 = $stime;
 	  #0;
@@ -167,14 +167,14 @@ module mkMem_Model(CLK,
     v__h365 = v__h371 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
       if (EN_mem_server_request_put &&
-	  !mem_server_request_put_BITS_319_TO_256_ULT_0x4_ETC___d2)
+	  !mem_server_request_put_BITS_319_TO_256_ULT_0x8_ETC___d2)
 	$display("%0d: ERROR: Mem_Model.request.put: addr 0x%0h >= size 0x%0h (num raw-mem words)",
 		 v__h365,
 		 mem_server_request_put[319:256],
-		 64'h0000000004000000);
+		 64'h0000000008000000);
     if (RST_N != `BSV_RESET_VALUE)
       if (EN_mem_server_request_put &&
-	  !mem_server_request_put_BITS_319_TO_256_ULT_0x4_ETC___d2)
+	  !mem_server_request_put_BITS_319_TO_256_ULT_0x8_ETC___d2)
 	$finish(32'd1);
   end
   // synopsys translate_on

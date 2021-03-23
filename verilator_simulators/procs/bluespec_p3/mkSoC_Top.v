@@ -1192,7 +1192,9 @@ module mkSoC_Top(CLK,
        WILL_FIRE_RL_mem0_controller_axi4_deburster_rl_rd_resp_slave_to_master,
        WILL_FIRE_RL_mem0_controller_axi4_deburster_rl_rd_xaction_master_to_slave,
        WILL_FIRE_RL_mem0_controller_axi4_deburster_rl_wr_resp_slave_to_master,
-       WILL_FIRE_RL_mem0_controller_axi4_deburster_rl_wr_xaction_master_to_slave;
+       WILL_FIRE_RL_mem0_controller_axi4_deburster_rl_wr_xaction_master_to_slave,
+       WILL_FIRE_RL_rl_reset_complete,
+       WILL_FIRE_RL_rl_reset_start_2;
 
   // inputs to muxes for submodule ports
   wire [7 : 0] MUX_boot_rom_axi4_deburster_rg_ar_beat_count$write_1__VAL_2,
@@ -1212,9 +1214,7 @@ module mkSoC_Top(CLK,
 	       MUX_mem0_controller_axi4_deburster_rg_b_resp$write_1__VAL_2;
   wire MUX_boot_rom_axi4_deburster_rg_b_resp$write_1__SEL_2,
        MUX_flash_axi4_deburster_rg_b_resp$write_1__SEL_2,
-       MUX_mem0_controller_axi4_deburster_rg_b_resp$write_1__SEL_2,
-       MUX_rg_state$write_1__SEL_1,
-       MUX_rg_state$write_1__SEL_2;
+       MUX_mem0_controller_axi4_deburster_rg_b_resp$write_1__SEL_2;
 
   // declarations used by system tasks
   // synopsys translate_off
@@ -2436,6 +2436,20 @@ module mkSoC_Top(CLK,
 	       .RDY_put_from_console_put(uart0$RDY_put_from_console_put),
 	       .intr(uart0$intr));
 
+  // rule RL_rl_reset_start_2
+  assign WILL_FIRE_RL_rl_reset_start_2 =
+	     fabric$RDY_reset &&
+	     mem0_controller$RDY_server_reset_request_put &&
+	     uart0$RDY_server_reset_request_put &&
+	     rg_state == 2'd0 ;
+
+  // rule RL_rl_reset_complete
+  assign WILL_FIRE_RL_rl_reset_complete =
+	     mem0_controller$RDY_set_addr_map &&
+	     mem0_controller$RDY_server_reset_response_get &&
+	     uart0$RDY_server_reset_response_get &&
+	     rg_state == 2'd2 ;
+
   // rule RL_boot_rom_axi4_deburster_rl_wr_xaction_master_to_slave
   assign WILL_FIRE_RL_boot_rom_axi4_deburster_rl_wr_xaction_master_to_slave =
 	     boot_rom_axi4_deburster_xactor_to_slave_f_wr_addr$FULL_N &&
@@ -2542,16 +2556,6 @@ module mkSoC_Top(CLK,
 	      mem0_controller_axi4_deburster_xactor_to_slave_f_wr_resp$D_OUT[1:0] !=
 	      2'b0 ||
 	      !mem0_controller_axi4_deburster_rg_b_beat_count_ETC___d276) ;
-  assign MUX_rg_state$write_1__SEL_1 =
-	     mem0_controller$RDY_set_addr_map &&
-	     mem0_controller$RDY_server_reset_response_get &&
-	     uart0$RDY_server_reset_response_get &&
-	     rg_state == 2'd2 ;
-  assign MUX_rg_state$write_1__SEL_2 =
-	     mem0_controller$RDY_server_reset_request_put &&
-	     uart0$RDY_server_reset_request_put &&
-	     fabric$RDY_reset &&
-	     rg_state == 2'd0 ;
   assign MUX_boot_rom_axi4_deburster_rg_ar_beat_count$write_1__VAL_2 =
 	     boot_rom_axi4_deburster_rg_ar_beat_count_6_ULT_ETC___d98 ?
 	       x__h7390 :
@@ -2767,9 +2771,9 @@ module mkSoC_Top(CLK,
 	     mem0_controller_axi4_deburster_rg_reset ;
 
   // register rg_state
-  assign rg_state$D_IN = MUX_rg_state$write_1__SEL_1 ? 2'd1 : 2'd2 ;
+  assign rg_state$D_IN = WILL_FIRE_RL_rl_reset_complete ? 2'd1 : 2'd2 ;
   assign rg_state$EN =
-	     MUX_rg_state$write_1__SEL_1 || MUX_rg_state$write_1__SEL_2 ;
+	     WILL_FIRE_RL_rl_reset_complete || WILL_FIRE_RL_rl_reset_start_2 ;
 
   // submodule boot_rom
   assign boot_rom$set_addr_map_addr_base = soc_map$m_boot_rom_addr_base ;
@@ -2830,7 +2834,7 @@ module mkSoC_Top(CLK,
 	     boot_rom_axi4_deburster_xactor_to_slave_f_wr_data$D_OUT[8:1] ;
   assign boot_rom$slave_wvalid =
 	     boot_rom_axi4_deburster_xactor_to_slave_f_wr_data$EMPTY_N ;
-  assign boot_rom$EN_set_addr_map = MUX_rg_state$write_1__SEL_1 ;
+  assign boot_rom$EN_set_addr_map = WILL_FIRE_RL_rl_reset_complete ;
 
   // submodule boot_rom_axi4_deburster_f_r_arlen
   assign boot_rom_axi4_deburster_f_r_arlen$D_IN =
@@ -3184,7 +3188,7 @@ module mkSoC_Top(CLK,
   assign fabric$v_to_slaves_4_rresp = gpio$slave_rresp ;
   assign fabric$v_to_slaves_4_rvalid = gpio$slave_rvalid ;
   assign fabric$v_to_slaves_4_wready = gpio$slave_wready ;
-  assign fabric$EN_reset = MUX_rg_state$write_1__SEL_2 ;
+  assign fabric$EN_reset = WILL_FIRE_RL_rl_reset_start_2 ;
   assign fabric$EN_set_verbosity = 1'b0 ;
 
   // submodule flash
@@ -3246,7 +3250,7 @@ module mkSoC_Top(CLK,
 	     flash_axi4_deburster_xactor_to_slave_f_wr_data$D_OUT[8:1] ;
   assign flash$slave_wvalid =
 	     flash_axi4_deburster_xactor_to_slave_f_wr_data$EMPTY_N ;
-  assign flash$EN_set_addr_map = MUX_rg_state$write_1__SEL_1 ;
+  assign flash$EN_set_addr_map = WILL_FIRE_RL_rl_reset_complete ;
 
   // submodule flash_axi4_deburster_f_r_arlen
   assign flash_axi4_deburster_f_r_arlen$D_IN =
@@ -3452,7 +3456,7 @@ module mkSoC_Top(CLK,
   assign gpio$slave_wlast = fabric$v_to_slaves_4_wlast ;
   assign gpio$slave_wstrb = fabric$v_to_slaves_4_wstrb ;
   assign gpio$slave_wvalid = fabric$v_to_slaves_4_wvalid ;
-  assign gpio$EN_set_addr_map = MUX_rg_state$write_1__SEL_1 ;
+  assign gpio$EN_set_addr_map = WILL_FIRE_RL_rl_reset_complete ;
 
   // submodule mem0_controller
   assign mem0_controller$set_addr_map_addr_base =
@@ -3521,10 +3525,10 @@ module mkSoC_Top(CLK,
 	     mem0_controller_axi4_deburster_xactor_to_slave_f_wr_data$EMPTY_N ;
   assign mem0_controller$to_raw_mem_response_put = to_raw_mem_response_put ;
   assign mem0_controller$EN_server_reset_request_put =
-	     MUX_rg_state$write_1__SEL_2 ;
+	     WILL_FIRE_RL_rl_reset_start_2 ;
   assign mem0_controller$EN_server_reset_response_get =
-	     MUX_rg_state$write_1__SEL_1 ;
-  assign mem0_controller$EN_set_addr_map = MUX_rg_state$write_1__SEL_1 ;
+	     WILL_FIRE_RL_rl_reset_complete ;
+  assign mem0_controller$EN_set_addr_map = WILL_FIRE_RL_rl_reset_complete ;
   assign mem0_controller$EN_to_raw_mem_request_get =
 	     EN_to_raw_mem_request_get ;
   assign mem0_controller$EN_to_raw_mem_response_put =
@@ -3746,9 +3750,9 @@ module mkSoC_Top(CLK,
   assign uart0$slave_wlast = fabric$v_to_slaves_2_wlast ;
   assign uart0$slave_wstrb = fabric$v_to_slaves_2_wstrb ;
   assign uart0$slave_wvalid = fabric$v_to_slaves_2_wvalid ;
-  assign uart0$EN_server_reset_request_put = MUX_rg_state$write_1__SEL_2 ;
-  assign uart0$EN_server_reset_response_get = MUX_rg_state$write_1__SEL_1 ;
-  assign uart0$EN_set_addr_map = MUX_rg_state$write_1__SEL_1 ;
+  assign uart0$EN_server_reset_request_put = WILL_FIRE_RL_rl_reset_start_2 ;
+  assign uart0$EN_server_reset_response_get = WILL_FIRE_RL_rl_reset_complete ;
+  assign uart0$EN_set_addr_map = WILL_FIRE_RL_rl_reset_complete ;
   assign uart0$EN_get_to_console_get = EN_get_to_console_get ;
   assign uart0$EN_put_from_console_put = EN_put_from_console_put ;
 
@@ -3987,24 +3991,24 @@ module mkSoC_Top(CLK,
   begin
     #0;
     if (RST_N != `BSV_RESET_VALUE)
-      if (MUX_rg_state$write_1__SEL_2)
+      if (WILL_FIRE_RL_rl_reset_start_2)
 	begin
 	  v__h22550 = $stime;
 	  #0;
 	end
     v__h22544 = v__h22550 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
-      if (MUX_rg_state$write_1__SEL_2)
+      if (WILL_FIRE_RL_rl_reset_start_2)
 	$display("%0d: SoC_Top. Reset start ...", v__h22544);
     if (RST_N != `BSV_RESET_VALUE)
-      if (MUX_rg_state$write_1__SEL_1)
+      if (WILL_FIRE_RL_rl_reset_complete)
 	begin
 	  v__h23123 = $stime;
 	  #0;
 	end
     v__h23117 = v__h23123 / 32'd10;
     if (RST_N != `BSV_RESET_VALUE)
-      if (MUX_rg_state$write_1__SEL_1)
+      if (WILL_FIRE_RL_rl_reset_complete)
 	$display("%0d: SoC_Top. Reset complete ...", v__h23117);
     if (RST_N != `BSV_RESET_VALUE)
       if (WILL_FIRE_RL_boot_rom_axi4_deburster_rl_wr_xaction_master_to_slave &&

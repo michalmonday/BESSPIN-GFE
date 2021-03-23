@@ -254,8 +254,8 @@ void c_mem_load_elf (char *elf_filename,
 #define MAX_MEM_ADDR_256MB  (BASE_ADDR_B + 0x10000000lu)
 
 // For 2GB memory at 0x_8000_0000
-#define MIN_MEM_ADDR_2GB  BASE_ADDR_B
-#define MAX_MEM_ADDR_2GB  (BASE_ADDR_B + 0x80000000lu)
+#define MIN_MEM_ADDR_4GB  BASE_ADDR_B
+#define MAX_MEM_ADDR_4GB  (BASE_ADDR_B + 0x100000000lu)
 
 // ================================================================
 
@@ -286,8 +286,8 @@ void write_mem_hex_file (FILE *fp, uint64_t addr1, uint64_t addr2)
     }
 
     // Write last word, if necessary, to avoid warnings about missing locations
-    if (addr < (MAX_MEM_ADDR_2GB - bytes_per_raw_mem_word)) {
-	addr = MAX_MEM_ADDR_2GB - bytes_per_raw_mem_word;
+    if (addr < (MAX_MEM_ADDR_4GB - bytes_per_raw_mem_word)) {
+	addr = MAX_MEM_ADDR_4GB - bytes_per_raw_mem_word;
 	fprintf (fp, "@%07" PRIx64 "    // last raw_mem addr;  byte addr: %08" PRIx64 "\n",
 		 ((addr - BASE_ADDR_B) / bytes_per_raw_mem_word),
 		 addr - BASE_ADDR_B);
@@ -308,8 +308,8 @@ void print_usage (FILE *fp, int argc, char *argv [])
     fprintf (fp, "    %s  <ELF filename>  <mem hex filename>\n", argv [0]);
     fprintf (fp, "Reads ELF file and writes a Verilog Hex Memory image file\n");
     fprintf (fp, "ELF file should have addresses within this range:\n");
-    fprintf (fp, "<  Max: 0x%8" PRIx64 "\n", MAX_MEM_ADDR_2GB);
-    fprintf (fp, ">= Min: 0x%8" PRIx64 "\n", MIN_MEM_ADDR_2GB);
+    fprintf (fp, "<  Max: 0x%8" PRIx64 "\n", MAX_MEM_ADDR_4GB);
+    fprintf (fp, ">= Min: 0x%8" PRIx64 "\n", MIN_MEM_ADDR_4GB);
 }
 
 // ================================================================
@@ -331,7 +331,7 @@ int main (int argc, char *argv [])
 
     c_mem_load_elf (argv [1], "_start", "exit", "tohost");
 
-    if ((min_addr < BASE_ADDR_B) || (MAX_MEM_ADDR_2GB <= max_addr)) {
+    if ((min_addr < BASE_ADDR_B) || (MAX_MEM_ADDR_4GB <= max_addr)) {
 	print_usage (stderr, argc, argv);
 	exit (1);
     }
@@ -344,7 +344,7 @@ int main (int argc, char *argv [])
 
     fprintf (stdout, "Writing mem hex to file '%s'\n", argv [2]);
     write_mem_hex_file (fp_out, min_addr, max_addr);
-    // write_mem_hex_file (fp_out, BASE_ADDR_B, MAX_MEM_ADDR_2GB);
+    // write_mem_hex_file (fp_out, BASE_ADDR_B, MAX_MEM_ADDR_4GB);
 
     fclose (fp_out);
 }

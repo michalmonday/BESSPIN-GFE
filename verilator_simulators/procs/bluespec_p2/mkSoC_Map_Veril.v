@@ -383,15 +383,15 @@ module mkSoC_Map_Veril(CLK,
   assign m_ddr4_0_cached_addr_base = 64'h00000000C0000000 ;
 
   // value method m_ddr4_0_cached_addr_size
-  assign m_ddr4_0_cached_addr_size = 64'h0000000040000000 ;
+  assign m_ddr4_0_cached_addr_size = 64'h00000000C0000000 ;
 
   // value method m_ddr4_0_cached_addr_lim
-  assign m_ddr4_0_cached_addr_lim = 64'h0000000100000000 ;
+  assign m_ddr4_0_cached_addr_lim = 64'h0000000180000000 ;
 
   // value method m_is_mem_addr
   assign m_is_mem_addr =
 	     m_is_mem_addr_addr >= 64'h00000000C0000000 &&
-	     m_is_mem_addr_addr < 64'h0000000100000000 ;
+	     m_is_mem_addr_addr < 64'h0000000180000000 ;
 
   // value method m_is_IO_addr
   assign m_is_IO_addr =
