@@ -34,12 +34,13 @@ function check_file {
 }
 
 function proc_usage {
-    echo "Usage: $0 <chisel_p1|chisel_p2|chisel_p2_pcie|chisel_p3|bluespec_p1|bluespec_p2|bluespec_p2_pcie|bluespec_p3> [secure-boot-binary-image]"
+    echo "Usage: $0 <chisel_p1|chisel_p2|chisel_p2_pcie|chisel_p3|bluespec_p1|bluespec_p2|bluespec_p2_pcie|bluespec_p3|bluespec_p3_dual> [secure-boot-binary-image]"
     echo "Please specify a bluespec or chisel processor, and optionally a binary image"
 }
 
 function proc_picker {
 	# Parse the processor selection
+        num_cores=1
 	if [ "$1" == "bluespec_p1" ]; then
 	        proc_name="bluespec_p1"
 	elif [ "$1" == "bluespec_p2" ]; then
@@ -48,6 +49,9 @@ function proc_picker {
 	        proc_name="bluespec_p2_pcie"
 	elif [ "$1" == "bluespec_p3" ]; then
 	        proc_name="bluespec_p3"
+	elif [ "$1" == "bluespec_p3_dual" ]; then
+	        proc_name="bluespec_p3"
+	        num_cores=2
 	elif [ "$1" == "chisel_p1" ]; then
 	        proc_name="chisel_p1"
 	elif [ "$1" == "chisel_p2" ]; then
