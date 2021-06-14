@@ -241,7 +241,7 @@ if {[string equal [get_runs -quiet impl_1] ""]} {
 }
 
 # Special case: avoid congestion for bluespec_p3
-if { [string equal $proc_name "bluespec_p3"] }
+if { [string equal $proc_name "bluespec_p3"] } {
     set_property strategy "Congestion_SpreadLogic_high" [get_runs impl_1]
     set_property flow "Vivado Implementation 2019" [get_runs impl_1]
 }
