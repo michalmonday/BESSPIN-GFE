@@ -59,11 +59,6 @@ variables:
 # Verilator simulation tests
 #
 #-----------------------------------------------------------------------------#
-CHSL_P1_sim:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p1 --simulator
-  extends: [.log_failure, .no_sched, .verilator]
 
 BSV_P1_sim:
   timeout: 1h
@@ -71,22 +66,10 @@ BSV_P1_sim:
     - ./pytest_processor.py bluespec_p1 --simulator
   extends: [.log_failure, .no_sched, .verilator]
 
-CHSL_P2_sim:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p2 --simulator
-  extends: [.log_failure, .no_sched, .verilator]
-
 BSV_P2_sim:
   timeout: 1h
   script:
     - ./pytest_processor.py bluespec_p2 --simulator
-  extends: [.log_failure, .no_sched, .verilator]
-
-CHSL_P3_sim:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p3 --simulator
   extends: [.log_failure, .no_sched, .verilator]
 
 BSV_P3_sim:
@@ -228,44 +211,6 @@ BSV_P1_network:
 
 #-----------------------#
 #                       #
-#     Chisel P1
-#                       #
-#-----------------------#
-CHSL_P1_isa:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p1 --isa
-  extends: [.log_always, .no_sched, .fpga]
-
-CHSL_P1_flash:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p1 --freertos --flash
-  extends: [.log_always, .no_sched, .fpga]
-
-CHSL_P1_io:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p1 --freertos --io
-    - ./pytest_processor.py chisel_p1 --freertos --io --compiler clang
-  extends: [.log_always, .no_sched, .fpga_io]
-
-CHSL_P1_freertos:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p1 --freertos
-    - ./pytest_processor.py chisel_p1 --freertos --compiler clang
-  extends: [.log_always, .no_sched, .fpga]
-
-CHSL_P1_network:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p1 --freertos --network
-    - ./pytest_processor.py chisel_p1 --freertos --network --compiler clang
-  extends: [.log_always, .no_sched, .fpga_network]
-
-#-----------------------#
-#                       #
 #     Bluespec P2
 #                       #
 #-----------------------#
@@ -345,137 +290,6 @@ BSV_P2_freebsd:
 
 #-----------------------#
 #                       #
-#     Chisel P2
-#                       #
-#-----------------------#
-CHSL_P2_isa:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p2 --isa
-  extends: [.log_always, .no_sched, .fpga]
-
-CHSL_P2_flash:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p2 --freertos --flash
-  extends: [.log_always, .no_sched, .fpga]
-
-CHSL_P2_freertos:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p2 --freertos
-    - ./pytest_processor.py chisel_p2 --freertos --compiler clang
-  extends: [.log_always, .no_sched, .fpga]
-
-CHSL_P2_network:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p2 --freertos --network
-    - ./pytest_processor.py chisel_p2 --freertos --network --compiler clang
-  extends: [.log_always, .no_sched, .fpga_network]
-
-
-CHSL_P2_busybox:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p2 --busybox --network
-  extends: [.log_always, .no_sched, .fpga]
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - bootmem/
-
-CHSL_P2_PCIE_busybox:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p2_pcie --busybox --network
-  extends: [.log_always, .no_sched, .fpga_pcie]
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - bootmem/
-
-CHSL_P2_freebsd:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p2 --freebsd
-  extends: [.log_always, .fpga]
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - freebsd/world
-      - freebsd/obj
-      - freebsd/freebsd.bbl
-  only:
-    variables:
-      - $JOB_TYPE == "linux"
-
-CHSL_P2_debian:
-  script:
-    - cd bootmem && make clean && make debian && cd ..
-    # TODO
-    - ./pytest_processor.py chisel_p2 --netboot --elf bootmem/build-debian-bbl/bbl --timeout 600 --expected "Debian GNU/Linux,login"
-  tags: ["fpga-pcie"]
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - debian/riscv64-chroot.tar
-      - bootmem/
-  only:
-    variables:
-      - $JOB_TYPE == "linux"
-
-#-----------------------#
-#                       #
-#     Chisel P3
-#                       #
-#-----------------------#
-CHSL_P3_isa:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p3 --isa
-  extends: [.log_always, .no_sched, .fpga]
-
-CHSL_P3_busybox:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p3 --busybox --network
-  extends: [.log_always, .no_sched, .fpga]
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - bootmem/
-
-CHSL_P3_freebsd:
-  timeout: 1h
-  script:
-    - ./pytest_processor.py chisel_p3 --freebsd
-  extends: [.log_always, .fpga]
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - freebsd/world
-      - freebsd/obj
-      - freebsd/freebsd.bbl
-  only:
-    variables:
-      - $JOB_TYPE == "linux"
-
-# CHSL_P3:
-#   script:
-#     - ./pytest_processor.py chisel_p3 --debian
-#   tags: ["fpga-pcie"]
-#   cache:
-#     key: ${CI_COMMIT_REF_SLUG}
-#     paths:
-#       - debian/riscv64-chroot.tar
-#       - bootmem/
-#   only:
-#       variables:
-#       - $JOB_TYPE == "linux"
-
-#-----------------------#
-#                       #
 #     Bluespec P3
 #                       #
 #-----------------------#
@@ -514,85 +328,6 @@ BSV_P3_freebsd:
 # Bitstream generation
 #
 #-----------------------------------------------------------------------------#
-CHSL_P1_bitstream_gen:
-  timeout: 6h
-  script:
-    - ./setup_soc_project.sh chisel_p1
-    - ./build.sh chisel_p1
-    - ./get_ppa.py vivado/soc_chisel_p1/soc_chisel_p1.runs/impl_1/
-  tags: ["bitstream"]
-  artifacts:
-    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    when: always
-    expire_in: 1 week
-    paths:
-      - bitstreams/soc_chisel_p1.*
-      - vivado/soc_chisel_p1/soc_chisel_p1.runs/impl_1/design_1_timing_summary_routed.rpt
-      - vivado/soc_chisel_p1/soc_chisel_p1.runs/impl_1/design_1_utilization_placed.rpt
-      - vivado/soc_chisel_p1/soc_chisel_p1.runs/impl_1/design_1_power_routed.rpt
-  only:
-    variables:
-      - $JOB_TYPE == "bitstream_gen_chisel_p1"
-
-CHSL_P2_bitstream_gen:
-  timeout: 6h
-  script:
-    - ./setup_soc_project.sh chisel_p2
-    - ./build.sh chisel_p2
-    - ./get_ppa.py vivado/soc_chisel_p2/soc_chisel_p2.runs/impl_1/
-  tags: ["bitstream"]
-  artifacts:
-    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    when: always
-    expire_in: 1 week
-    paths:
-      - bitstreams/soc_chisel_p2.*
-      - vivado/soc_chisel_p2/soc_chisel_p2.runs/impl_1/design_1_timing_summary_routed.rpt
-      - vivado/soc_chisel_p2/soc_chisel_p2.runs/impl_1/design_1_utilization_placed.rpt
-      - vivado/soc_chisel_p2/soc_chisel_p2.runs/impl_1/design_1_power_routed.rpt
-  only:
-    variables:
-      - $JOB_TYPE == "bitstream_gen_chisel_p2"
-
-CHSL_P2_PCIE_bitstream_gen:
-  timeout: 6h
-  script:
-    - ./setup_soc_project.sh chisel_p2_pcie
-    - ./build.sh chisel_p2_pcie
-    - ./get_ppa.py vivado/soc_chisel_p2_pcie/soc_chisel_p2_pcie.runs/impl_1/
-  tags: ["bitstream"]
-  artifacts:
-    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    when: always
-    expire_in: 1 week
-    paths:
-      - bitstreams/soc_chisel_p2_pcie.*
-      - vivado/soc_chisel_p2_pcie/soc_chisel_p2_pcie.runs/impl_1/design_1_timing_summary_routed.rpt
-      - vivado/soc_chisel_p2_pcie/soc_chisel_p2_pcie.runs/impl_1/design_1_utilization_placed.rpt
-      - vivado/soc_chisel_p2_pcie/soc_chisel_p2_pcie.runs/impl_1/design_1_power_routed.rpt
-  only:
-    variables:
-      - $JOB_TYPE == "bitstream_gen_chisel_p2"
-
-CHSL_P3_bitstream_gen:
-  timeout: 6h
-  script:
-    - ./setup_soc_project.sh chisel_p3
-    - ./build.sh chisel_p3
-    - ./get_ppa.py vivado/soc_chisel_p3/soc_chisel_p3.runs/impl_1/
-  tags: ["bitstream"]
-  artifacts:
-    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    when: always
-    expire_in: 1 week
-    paths:
-      - bitstreams/soc_chisel_p3.*
-      - vivado/soc_chisel_p3/soc_chisel_p3.runs/impl_1/design_1_timing_summary_routed.rpt
-      - vivado/soc_chisel_p3/soc_chisel_p3.runs/impl_1/design_1_utilization_placed.rpt
-      - vivado/soc_chisel_p3/soc_chisel_p3.runs/impl_1/design_1_power_routed.rpt
-  only:
-    variables:
-      - $JOB_TYPE == "bitstream_gen_chisel_p3"
 
 BSV_P1_bitstream_gen:
   timeout: 6h
@@ -709,23 +444,6 @@ testgen:
 # Stress test
 #
 #-----------------------------------------------------------------------------#
-CHSL_P1_StressTest:
-  timeout: 3h
-  script:
-    - ./pytest_consistency.py 25 chisel_p1 --freertos --network
-  extends: [.log_always, .fpga]
-  only:
-    variables:
-      - $JOB_TYPE == "stress"
-
-CHSL_P2_StressTest:
-  timeout: 3h
-  script:
-    - ./pytest_consistency.py 25 chisel_p2 --busybox --network
-  extends: [.log_always, .fpga]
-  only:
-    variables:
-      - $JOB_TYPE == "stress"
 
 BSV_P1_StressTest:
   timeout: 3h
