@@ -43,28 +43,39 @@ function proc_picker {
         num_cores=1
 	if [ "$1" == "bluespec_p1" ]; then
 	        proc_name="bluespec_p1"
+                proc_dir="bluespec-processors/P1/Piccolo/"
 	elif [ "$1" == "bluespec_p2" ]; then
 	        proc_name="bluespec_p2"
+                proc_dir="bluespec-processors/P2/Flute/"
 	elif [ "$1" == "bluespec_p2_pcie" ]; then
 	        proc_name="bluespec_p2_pcie"
+                proc_dir="bluespec-processors/P2/Flute/"
 	elif [ "$1" == "bluespec_p3" ]; then
 	        proc_name="bluespec_p3"
+                proc_dir="bluespec-processors/P3/Toooba/"
 	elif [ "$1" == "bluespec_p3_dual" ]; then
 	        proc_name="bluespec_p3"
+                proc_dir="bluespec-processors/P3/Toooba/"
 	        num_cores=2
 	elif [ "$1" == "chisel_p1" ]; then
 	        proc_name="chisel_p1"
+                proc_dir="chisel-processors/P1/"
 	elif [ "$1" == "chisel_p2" ]; then
 	        proc_name="chisel_p2"
+                proc_dir="chisel-processors/P2/"
 	elif [ "$1" == "chisel_p2_pcie" ]; then
 	        proc_name="chisel_p2_pcie"
+                proc_dir="chisel-processors/P2/"
 	elif [ "$1" == "chisel_p3" ]; then
 	        proc_name="chisel_p3"
+                proc_dir="chisel-processors/P3/"
 	else
 	        proc_usage
             echo "Please specify a bluespec or chisel processor!"
 	        exit -1
 	fi
+        proc_hash="$(git -C $BASE_DIR/$proc_dir show --pretty=\"%H\" -q)"
+        gfe_hash="$(git show --pretty=\"%H\" -q)"
 }
 
 function proc_xlen_usage {

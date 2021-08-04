@@ -38,6 +38,7 @@
 		_CPU_RISCV_ISA \
 		_CPU_MMU_TYPE \
 		clock-frequency = <CPU_SPEED>; \
+		sri-cambridge,version = PROC_HASH; \
 		CPU##_n##_intc: interrupt-controller { \
 			#interrupt-cells = <1>; \
 			interrupt-controller; \
@@ -56,6 +57,7 @@
 	#size-cells = <1>;
 	compatible = "unknown,unknown";
 	model = "unknown,unknown";
+	sri-cambridge,version = GFE_HASH; \
 	chosen {
 		bootargs = "earlyprintk console=ttyS0,115200 loglevel=15";
 		stdout-path = &ns16550;

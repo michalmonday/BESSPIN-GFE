@@ -37,7 +37,7 @@ all: $(bootrom_img) $(bootrom_mem) $(bootrom_coe) $(bootrom_rev_mem)
 	$(OBJDUMP) -d $< > $@
 
 %.dtb: %.dts
-	$(CPP) -x assembler-with-cpp -DCPU_SPEED=$(CPU_SPEED) -DRTC_FREQ=$(RTC_FREQ) -DMEM_SIZE=$(MEM_SIZE) -DNO_PCI=$(NO_PCI) -DNUM_CORES=$(NUM_CORES) $< | $(DTC) -O dtb -o $@
+	$(CPP) -x assembler-with-cpp -DCPU_SPEED=$(CPU_SPEED) -DRTC_FREQ=$(RTC_FREQ) -DMEM_SIZE=$(MEM_SIZE) -DNO_PCI=$(NO_PCI) -DNUM_CORES=$(NUM_CORES) -DPROC_HASH="\"$(PROC_HASH)\"" -DGFE_HASH="\"$(GFE_HASH)\"" $< | $(DTC) -O dtb -o $@
 
 %.elf: %.S linker.ld devicetree.dtb
 	$(GCC) -Tlinker.ld $< -nostdlib -static -Wl,--no-gc-sections -o $@
