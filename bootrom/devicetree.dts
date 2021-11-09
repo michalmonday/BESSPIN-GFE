@@ -115,7 +115,7 @@
 				>;
 			reg = <0x10000000 0x10000>;
 		};
-		plic: interrupt-controller@11000000 {
+		plic: interrupt-controller@c000000 {
 			#interrupt-cells = <1>;
 			compatible = "riscv,plic0";
 			interrupt-controller;
