@@ -127,6 +127,14 @@
 			clock-frequency = <CPU_SPEED>;
 			reg-shift = <2>;
 		};
+		ns16550_2: uart@62340000 {
+			current-speed = <115200>;
+			compatible = "ns16550a";
+			interrupts-extended = <&plic 6>;
+			reg = <0x62340000 0x1000>;
+			clock-frequency = <CPU_SPEED>;
+			reg-shift = <2>;
+		};
 #if NO_PCI == 0
 		pci: pci@20000000 {
 		     #address-cells = <3>;
